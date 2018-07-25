@@ -1,0 +1,22 @@
+{
+  "AutoTextList": [
+    {
+      "BASE_URL": "http://dev-spisa.herokuapp.com",
+      "REDIRECT_URL": "/graphql"
+    }
+  ],
+  "Query": {
+    "cookingTips": "{cookingTipsWithTotal { total: total}}",
+    "getProductsList": "{getProductsList (limit:3) {count}}",
+    "getHomePageData_cookingTip": "{getHomePageData{cookingTip {id, _id, title, isActive, desc, type}}}",
+    "getHomePageData_fact": "{getHomePageData{fact {  id, friendlyUrl, name, amount, isIngredientExist, isVerified,}}}",
+    "popularRecipes": "{popularRecipes {id title}}",
+    "search_recipes": "{search(max:10,q:\"egg\") {recipes {id, title}}}",
+    "search_drinks": "{search(max:10,q:\"rom\") {drinks {id, title}}}",
+    "login":"{userLogin(token:\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTcyYWFkMDYzNjFjNzAwMDQ4YTMzMTYiLCJpYXQiOjE1MTgxNTY1NjQsImV4cCI6MTUyMjI2NjcyMTIxN30.zxb5N2xEE7jCimJfZ7IsCZ5GKGPqqCeQrFIqGKhX8WI\"){userName}}",
+    "resetPassword":"mutation { resetPassword(id:\"5a72aad06361c700048a3316\", password: \"123456\") {  message  status}}",
+    "getUserActivity":"{ getUserActivity(days: 7, recipesPerDay: 4) { viewedRecipes {  _id  createdAt  viewedRecipeCount  recipes {  _id  dateViewed  title  friendlyUrl  image {  publicId  __typename}__typename}__typename}__typename}}"
+
+
+  }
+}
