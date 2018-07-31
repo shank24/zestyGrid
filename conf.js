@@ -11,8 +11,9 @@ exports.config = {
   specs: [
 
 
+    'specs/login_test_spec.js',
     /*'specs/cooking_test_spec.js',*/
-    'specs/sample_test_spec.js',
+    /*'specs/sample_test_spec.js',*/
 
   ],
 

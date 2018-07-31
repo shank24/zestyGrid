@@ -30,8 +30,8 @@ describe('Test GraphQL API queries', function () {
 
     });
 
-    it('123456',function (done) {
-
+    xit('123456',function (done) {
+        console.log("KEshav");
     });
 
     xit('123456',function (done) {

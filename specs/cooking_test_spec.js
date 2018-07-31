@@ -42,24 +42,28 @@ describe('Test GraphQL API queries', function () {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getProductsList).then(function(data ){
 
+            console.log(">>>>>>. Total Count :: "+data.getProductsList.count);
+
             console.log(">>>>>>>>>>>>>>>>"+data.status);
+
             helperUtil.addStep("Total number of product lists are :: "+data.getProductsList.count);
 
             done();
         });
     });
 
-    it('SPISA-003 : Login API', function (done) {
+    xit('SPISA-003 : Login API', function (done) {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.login).then(function(data ){
 
+            console.log("User Name is :: "+data.userLogin.userName);
             helperUtil.addStep("User Name is :: "+data.userLogin.userName);
 
             done();
         });
     });
 
-    it('SPISA-004 : Search Drink API', function (done) {
+    xit('SPISA-004 : Search Drink API', function (done) {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.search_drinks).then(function(data ){
 
@@ -69,7 +73,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-005 : Search Recipe API', function (done) {
+    xit('SPISA-005 : Search Recipe API', function (done) {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.search_recipes).then(function(data ){
 
@@ -79,7 +83,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-006 : Get HomePage Data_cookingTip API', function (done) {
+    xit('SPISA-006 : Get HomePage Data_cookingTip API', function (done) {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getHomePageData_cookingTip).then(function(data ){
 
@@ -122,7 +126,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-005 : Search Recipe API', function (done) {
+    xit('SPISA-005 : Search Recipe API', function (done) {
 
         request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.search_recipes).then(function(data ){
 
