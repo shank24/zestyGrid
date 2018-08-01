@@ -1,5 +1,7 @@
 
 var request = require('graphql-request');
+var rawRequest = require('graphql-request').rawRequest;
+var fetch = require('isomorphic-fetch');
 
 var util = require('util'),
 
@@ -23,38 +25,86 @@ describe('Test GraphQL API queries', function () {
 
     it('SPISA-002 : Create User API', function (done) {
 
-        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.createUser).then(function(data1 ){
+        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.createUser).then(function(data){
 
-            console.log(">>>>>>. Total Count :: "+data1.createUser);
+            console.log(">>>>>>. Total Count :: "+data.createUser);
 
-            helperUtil.addStep("Total number of product lists are :: "+data1.createUser);
+            helperUtil.addStep("Total number of product lists are :: "+data.createUser);
 
-            var userID = data1.createUser;
+            var userID = data.createUser;
+            var authToken;
 
-            /*request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getUserID).then(function(data2 ){
+            fetch('http://zestypdevpalb-1416730740.us-east-1.elb.amazonaws.com/graphql', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: 'mutation { login(id: \"RT31@zestygrid.com\", pwd: \"RT3123@11\" ) }' }),
+            }).then(function(res) {
+                //console.log(res);
+                //console.log(res.headers.get('authorization'));
 
-                console.log(">>>>>>. Total Count :: "+data2.login);
+                 authToken = res.headers.get('authorization');
 
-            });*/
+                console.log("Authtoken is :: "+authToken);
+                return res.json();
+            })
+                .then(function(res){
+                    console.log("Only Output JSON :: "+res);
+
+                    done();
+                });
 
 
 
+
+        })
+        .catch(function(err) {
+            console.log(err);
+            console.log("holssss");
+            console.log(typeof err);
+            console.log(">>>>>>>>>>>>>>>>>>>>>>"+err.message);
             done();
         });
+
     });
 
-    it('SPISA-003 : Create User API', function (done) {
+    xit('SPISA-003 : Create User API', function (done) {
 
-        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getUserID).then(function(data2){
 
-                console.log(">>>>>>. Total Count :: "+data2);
+        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getUserID)
+            .then(function(data, res, body){
 
+            console.log(">>>>>>. Total Count :: "+JSON.stringify(data));
+
+            //console.log(res.Headers);
+                console.log('............................');
+            //console.log((res.Headers || {}).authorization);
+                done();
+            })
+            .catch(function (err) {
+                console.log('error is ', err);
+                done();
+            });
+    });
+
+
+    xit('SPISA-003-test : Create User API', function (done) {
+
+        fetch('http://zestypdevpalb-1416730740.us-east-1.elb.amazonaws.com/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: 'mutation { login(id: \"RT31@zestygrid.com\", pwd: \"RT3123@11\" ) }' }),
+        }).then(function(res) {
+            //console.log(res);
+            console.log(res.headers.get('authorization'));
+                return res.json();
+            })
+            .then(function(res){
+                //console.log(res);
+
+                done();
             });
 
-            done();
+
     });
-
-
-
 
 });

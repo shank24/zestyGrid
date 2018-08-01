@@ -48,17 +48,17 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  //grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-protractor-webdriver');
   grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('test', [
-    'default',
+   /* 'default',*/
     'protractor:singlerun',
     'exec:makeReport'
 
   ]);
-  grunt.registerTask('default', ['jshint']);
+  //grunt.registerTask('default', ['jshint']);
 
 };

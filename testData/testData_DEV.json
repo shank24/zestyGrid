@@ -6,8 +6,8 @@
     }
   ],
   "Query": {
-    "createUser": "mutation { createUser(user: { emailId: \"RT9@zestygrid.com\", pwd: \"RT123@11\", firstName: \"Rohit2\", lastName: \"Tiwari2\", cellPhone: \"9876543219\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Noida\", state: \"UP\", zip: \"160066\", country: \"India\"}, dateOfBirth: \"0000-00-00\" }) }",
-    "getUserID": "mutation { login(id: \"RT9@zestygrid.com\", pwd: \"RT123@11\" ) {  login } }",
+    "createUser": "mutation { createUser(user: { emailId: \"RT27@zestygrid.com\", pwd: \"RT123@11\", firstName: \"Rohit2\", lastName: \"Tiwari2\", cellPhone: \"9876543219\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Noida\", state: \"UP\", zip: \"160066\", country: \"India\"}, dateOfBirth: \"0000-00-00\" }) }",
+    "getUserID": "mutation { login(id: \"RT27@zestygrid.com\", pwd: \"RT123@11\" )}",
     "cookingTips": "{cookingTipsWithTotal { total: total}}",
     "getProductsList": "{getProductsList (limit:3) {count}}",
     "getHomePageData_cookingTip": "{getHomePageData{cookingTip {id, _id, title, isActive, desc, type}}}",
