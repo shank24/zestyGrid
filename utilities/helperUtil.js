@@ -209,7 +209,7 @@ var helperUtil = {},
       randomstring += allowedChars.substring(rnum, rnum + 1);
     }
     // Append a domain name
-    randomstring += "@yopmail.com";
+    randomstring += "@zestygrid.com";
     return randomstring;
   };
 
