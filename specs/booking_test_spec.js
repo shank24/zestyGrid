@@ -31,8 +31,8 @@ describe('Test GraphQL Booking API queries', function () {
     });
 
     it('SPISA-002 : Booking Create User API', function (done) {
-        console.log(global.userID);
-        console.log(global.authToken);
+        helperUtil.addStep("User ID :: "+global.userID);
+        helperUtil.addStep("User Auth Token :: "+global.authToken);
 
         done();
     });

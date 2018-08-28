@@ -14,6 +14,8 @@ var util = require('util'),
 
 describe('Test GraphQL API queries', function () {
 
+    var updateUserQuery = "mutation { updateUser(user:{id: \"" + userInfo.userID+ "\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
+
     beforeEach(function (done) {
         if (!userInfo) {
             helperUtil.envInfo();
@@ -30,13 +32,13 @@ describe('Test GraphQL API queries', function () {
     });
 
     it('SPISA-001 : Create User API Sample', function (done) {
-                /*var updateUserQuery = "mutation { updateUser(user:{id: \"" + userInfo.userID+ "\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
+
                 request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, updateUserQuery).then(function(data ){
 
                     helperUtil.addStep("Total Sections is :: "+data.updateUser);
 
                 });
-        */
+
 
            console.log("Hola :: ",global.authToken);
 
