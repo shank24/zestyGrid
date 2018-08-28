@@ -12,40 +12,37 @@ var util = require('util'),
   JSONData = require('./../testData/testData_' + process.env.NODE_ENV+ '.json');
 
 
-describe('Test GraphQL API queries', function () {
+describe('Test GraphQL Cook API queries', function () {
 
     beforeEach(function (done) {
-        if (!userInfo) {
+        if (!global.authToken) {
             helperUtil.envInfo();
-            helperUtil.generateAuthToken(function (err, payload) {
-                if (err) {
-
-                }
-                userInfo = payload;
-                done(err);
-            });
+            done();
         } else {
             done();
         }
     });
 
-    it('SPISA-001 : Create User API Sample', function (done) {
-                /*var updateUserQuery = "mutation { updateUser(user:{id: \"" + userInfo.userID+ "\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
-                request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, updateUserQuery).then(function(data ){
+    it('SPISA-001 : Cook Create User API Sample', function (done) {
 
-                    helperUtil.addStep("Total Sections is :: "+data.updateUser);
+        console.log("Hola cook:: ",global.authToken);
+        console.log("Hola :: ",global.userID);
+        var updateUserQuery = "mutation { updateUser(user:{id: \"" + global.userID+ "\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
 
-                });
-        */
 
-           console.log("Hola :: ",global.authToken);
+
+        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, updateUserQuery).then(function(data ){
+
+            helperUtil.addStep("Total Sections is :: "+data.updateUser);
+
+        });
 
         done();
     });
 
-    xit('SPISA-002 : Create User API', function (done) {
-        console.log(userInfo.userID);
-        console.log(userInfo.authToken);
+    it('SPISA-002 : Cook Create User API', function (done) {
+        console.log(global.userID);
+        console.log(global.authToken);
 
         done();
     });

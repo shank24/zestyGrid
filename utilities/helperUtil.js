@@ -58,7 +58,8 @@ var helperUtil = {},
       }).then(function(res) {
 
         authToken = res.headers.get('authorization');
-
+        global.authToken = authToken;
+        global.userID = userID;
         helperUtil.addStep("Auth Token is :: "+authToken);
 
         return res.json();
