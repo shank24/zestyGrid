@@ -14,7 +14,8 @@ var util = require('util'),
 
 describe('Test GraphQL API queries', function () {
 
-    var updateUserQuery = "mutation { updateUser(user:{id: \"" + userInfo.userID+ "\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
+    var updateUserQuery;
+
 
     beforeEach(function (done) {
         if (!userInfo) {
@@ -24,6 +25,8 @@ describe('Test GraphQL API queries', function () {
 
                 }
                 userInfo = payload;
+                updateUserQuery = "mutation { updateUser(user:{id: \"" + global.userID + "\", firstName: \"Keshav\", lastName: \"Seera\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
+
                 done(err);
             });
         } else {
@@ -31,85 +34,27 @@ describe('Test GraphQL API queries', function () {
         }
     });
 
-    it('SPISA-001 : Create User API Sample', function (done) {
+    it('SPISA-001 :Update User API Sample', function (done) {
 
-                request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, updateUserQuery).then(function(data ){
-
-                    helperUtil.addStep("Total Sections is :: "+data.updateUser);
-
-                });
-
-
-           console.log("Hola :: ",global.authToken);
-
-        done();
-    });
-
-    xit('SPISA-002 : Create User API', function (done) {
-        console.log(userInfo.userID);
-        console.log(userInfo.authToken);
-
-        done();
-    });
-
-
-
-    xit('SPISA-003 : Create User API', function (done) {
-
-
-        request.request(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, JSONData.Query.getUserID)
-            .then(function(data, res, body){
-
-            console.log(">>>>>>. Total Count :: "+JSON.stringify(data));
-
-            //console.log(res.Headers);
-                console.log('............................');
-            //console.log((res.Headers || {}).authorization);
-                done();
-            })
-            .catch(function (err) {
-                console.log('error is ', err);
-                done();
-            });
-    });
-
-
-    xit('SPISA-003-test : Create User API', function (done) {
-
-        fetch('http://zestypdevpalb-1416730740.us-east-1.elb.amazonaws.com/graphql', {
+        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ query: 'mutation { login(id: \"RT31@zestygrid.com\", pwd: \"RT3123@11\" ) }' }),
-        }).then(function(res) {
-            //console.log(res);
-            console.log(res.headers.get('authorization'));
-                return res.json();
-            })
-            .then(function(res){
-                //console.log(res);
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+            body: JSON.stringify({query: updateUserQuery}),
+        }).then(function (res) {
 
-                done();
-            });
+            return res.json();
 
-
-    });
-
-
-    xit('SPISA-123',function (done) {
-
-        const client = new GraphQLClient(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, {
-            headers: {
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzMmM1YmYzMi1lMDRkLTQyN2UtYmMxYy00ODFhYTQyZjQ0YjQiLCJpc0Nvb2siOmZhbHNlLCJpYXQiOjE1MzMyMDYxNDZ9.mIJzLlyC4W8uz-AhniWMYQ3fUIvnOBOuNzXQ1ouH7X0',
-            },
-        });
-
-        client.request(JSONData.Query.getUser).then(function(data){
-            console.log(data);
+        }).then(function (response) {
+            helperUtil.addStep("Updated response is :: " + response.data.updateUser);
             done();
         });
-
 
     });
 
 
 });
+
+
+
+
+

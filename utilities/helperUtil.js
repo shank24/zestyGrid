@@ -14,9 +14,6 @@ var helperUtil = {},
   var html5Lint = require( 'html5-lint' );
   var rp = require('request-promise');
 
-  /*const request = require("request"),
-        isUrl = require('is-url'),
-        cheerio = require("cheerio");*/
 
   helperUtil.generateAuthToken = function (done) {
 
