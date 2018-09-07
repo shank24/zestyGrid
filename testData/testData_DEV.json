@@ -10,4 +10,5 @@
     "updateUserQuery": "mutation { updateUser(user:{id: \"4c686360-f6ef-4dbc-9e9c-7b70a0f82ebe\", firstName: \"Charan\", lastName: \"Keet\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }"
 
   }
+
 }

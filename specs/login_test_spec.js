@@ -1,7 +1,5 @@
 
 var request = require('graphql-request');
-var rawRequest = require('graphql-request').rawRequest;
-var GraphQLClient = require('graphql-request').GraphQLClient;
 var fetch = require('isomorphic-fetch');
 
 var util = require('util'),
@@ -14,7 +12,7 @@ var util = require('util'),
 
 describe('Test GraphQL API queries', function () {
 
-    var updateUserQuery;
+    var updateUserQuery,addUserPayment;
 
 
     beforeEach(function (done) {
@@ -26,6 +24,7 @@ describe('Test GraphQL API queries', function () {
                 }
                 userInfo = payload;
                 updateUserQuery = "mutation { updateUser(user:{id: \"" + global.userID + "\", firstName: \"Keshav\", lastName: \"Seera\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
+                addUserPayment = "mutation {addUserPayment( userId: \"" + global.userID + "\", payment: { type: CARD, card: { number: \"378282246310005\", expMonth: 2, expYear: 2023, cvc: 321 } } )}"
 
                 done(err);
             });
@@ -51,6 +50,22 @@ describe('Test GraphQL API queries', function () {
 
     });
 
+    it('SPISA-001 :Add User Payment API Sample', function (done) {
+
+        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+            body: JSON.stringify({query: addUserPayment}),
+        }).then(function (res) {
+
+            return res.json();
+
+        }).then(function (response) {
+            helperUtil.addStep("Updated response is :: " + response.data.addUserPayment);
+            done();
+        });
+
+    });
 
 });
 

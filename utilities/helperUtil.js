@@ -21,21 +21,13 @@ var helperUtil = {},
 
     function generateUserQuery ( type, userId) {
       if( type === 'query') {
-
         return "query { user(id: \"" + userId+ "\") { id, emailId, firstName, lastName } }"
       }
-
       else if( type === 'createNewUser') {
-
-        console.log(">>>>>>>> Mutation ::",email.toString());
-
         return "mutation { createUser(user: { emailId: \""+ email.toString() +"\", pwd: \"RT123@11\", firstName: \"Rohit2\", lastName: \"Tiwari2\", cellPhone: \"9876543219\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Noida\", state: \"UP\", zip: \"160066\", country: \"India\"}, dateOfBirth: \"0000-00-00\" }) }"
-
       } else if(type ==='getUserID'){
-
         return "mutation { login(id: \""+ email.toString() +"\", pwd: \"RT123@11\" ) }"
       }
-
     }
 
 
@@ -45,7 +37,6 @@ var helperUtil = {},
       var userID = data.createUser;
       var authToken;
       var newUserIDQuery = generateUserQuery('query',userID);
-
 
       // Get Auth Token using Login API
       fetch(JSONData.AutoTextList[0].BASE_URL+JSONData.AutoTextList[0].REDIRECT_URL, {
@@ -71,10 +62,8 @@ var helperUtil = {},
             });
 
             helperUtil.addStep("Auto Generated Query is :: "+newUserIDQuery);
-
             client.request(newUserIDQuery).then(function(data){
 
-              console.log(data);
               helperUtil.addStep("ID :: "+data.user.id);
               helperUtil.addStep("Email ID :: "+data.user.emailId);
               helperUtil.addStep("First Name :: "+data.user.firstName);
@@ -87,10 +76,7 @@ var helperUtil = {},
           });
     })
         .catch(function(err) {
-          console.log(err);
-          console.log("holssss");
-          console.log(typeof err);
-          console.log(">>>>>>>>>>>>>>>>>>>>>>"+err.message);
+          console.log("Error Message :: "+err.message);
           done(err);
         });
   };
@@ -167,59 +153,7 @@ var helperUtil = {},
     request(url, qresponse);
   };
 
-  helperUtil.htmlConverter = function(htmlurl, callback){
-    return rp(htmlurl)
-      .then(function (htmlString) {
 
-        rp({
-          method: 'POST',
-          uri: 'https://search.google.com/structured-data/testing-tool/validate',
-          form: {
-            html: htmlString
-          }
-        }).then(function(response) {
-          function _getValidJson(str) {
-            if (str.split(')]}\'').length > 1) {
-              return str.split(')]}\'')[1];
-            } else {
-              return str;
-            }
-          }
-          // console.log(">>>", JSON.parse(_getValidJson(response)));
-
-          var responseData = JSON.parse(_getValidJson(response));
-          callback(responseData);
-        });
-      })
-      .catch(function (err) {
-        // Crawling failed...
-
-      });
-  };
-
-  helperUtil.validator = function (url) {
-    return rp(url)
-      .then(function (htmlString) {
-
-        var html5LintPromise = new Promise(function(resolve, reject){
-          html5Lint( htmlString, function( err, results ) {
-
-            console.log(">>>>>>>>>>>>>>"+results);
-        if (err){
-          return reject(err);
-        }
-        results.messages.forEach( function( msg ) {
-          var type = msg.type, // error or warning
-          message = msg.message;
-          console.log( "HTML5 Lint [%s]: %s", type, message );
-          helperUtil.addStep("HTML5 Lint [%s]: %s" + type + message );
-         });
-         resolve(results);
-       });
-       return html5LintPromise;
-      });
-    });
-  };
 
   helperUtil.envInfo = function () {
     helperUtil.addEnvironment("User Type :: ",process.env.NODE_USERTYPE);
@@ -245,13 +179,6 @@ var helperUtil = {},
     })();
   };
 
-  helperUtil.hoverToElement = function (hoverToElement) {
-    browser.actions().mouseMove(hoverToElement).perform();
-    return browser.actions()
-      .mouseUp()
-      .perform();
-  };
-
   helperUtil.Reporter = function (actualResult,expectedResult,passMessage,failMessage) {
     expect(actualResult).toBe(expectedResult);
     if(actualResult === expectedResult){
@@ -267,14 +194,6 @@ var helperUtil = {},
 
       helperUtil.addStepsWithScreenshot(failMessage);
     }
-  };
-
-  helperUtil.Element = function (elem,failMessage) {
-    elem.isPresent().then(function (isDisplayed){
-      if(isDisplayed !== true){
-        helperUtil.addStepsWithScreenshot(failMessage);
-      }
-    });
   };
 
   helperUtil.Reporter_toEqual = function (Expect,expectedResult,passMessage,failMessage) {
@@ -313,19 +232,6 @@ var helperUtil = {},
     }
   };
 
-  helperUtil.waitElement = function (elem, timeOut) {
-    timeOut = timeOut || 5000; // If timeOut value is Null then in that case 5000 will be the default value
-    var until = protractor.ExpectedConditions;
-    return browser.wait(until.presenceOf(elem), timeOut, 'Element taking too long to appear in the DOM');
-  };
-
-  helperUtil.selectDropDownByNum1 = function (elem, optionNum ) {
-    if (optionNum){
-      elem.$$('option').then(function(options){
-        options[optionNum].click();
-      });
-    }
-  };
 
   helperUtil.dummyEmailAddress = function () {
     var allowedChars = "abcdefghiklmnopqrstuvwxyz";
@@ -362,7 +268,6 @@ var helperUtil = {},
       mm = '0' + mm
     }
     todayDate = mm + '/' + dd + '/' + yyyy;
-    //console.log('Date is -- ' + todayDate);
     return todayDate;
   };
 
