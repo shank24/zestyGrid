@@ -64,6 +64,8 @@ var helperUtil = {},
             helperUtil.addStep("Auto Generated Query is :: "+newUserIDQuery);
             client.request(newUserIDQuery).then(function(data){
 
+              global.emailID = data.user.emailId;
+
               helperUtil.addStep("ID :: "+data.user.id);
               helperUtil.addStep("Email ID :: "+data.user.emailId);
               helperUtil.addStep("First Name :: "+data.user.firstName);
