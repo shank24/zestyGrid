@@ -61,7 +61,6 @@ describe('Test GraphQL API queries', function () {
             helperUtil.addStep("Updated response is :: " + response.data.updateUser);
             done();
         });
-
     });
 
     it('SPISA-002 :Add User to Stripe api', function (done) {
@@ -75,10 +74,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Add User to Stripe response is :: " + JSON.stringify(response.data.addUserToStripe));
             done();
         });
-
     });
 
     it('SPISA-003 :Add User Payment api', function (done) {
@@ -92,10 +90,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + response.data.addUserPayment);
+            helperUtil.addStep("Add User Payment response is :: " + response.data.addUserPayment);
             done();
         });
-
     });
 
     it('SPISA-004 :Update User Payment api', function (done) {
@@ -109,10 +106,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Update User Payment response is :: " + JSON.stringify(response.data.updateUserPayment));
             done();
         });
-
     });
 
     it('SPISA-005 :User Payment method api', function (done) {
@@ -126,10 +122,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("User Payment api response is :: " + JSON.stringify(response.data.userPaymentMethods[0]));
             done();
         });
-
     });
 
     it('SPISA-006 :Add Saved Items api', function (done) {
@@ -143,10 +138,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Add Saved Items response is :: " + JSON.stringify(response.data.addSavedItems));
             done();
         });
-
     });
 
     it('SPISA-007 :Saved Post api', function (done) {
@@ -160,10 +154,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Saved Post response is :: " + JSON.stringify(response.data.savedPosts.posts));
             done();
         });
-
     });
 
     it('SPISA-008 :Saved Dishes api', function (done) {
@@ -177,10 +170,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Saved Dishes api response is :: " + JSON.stringify(response.data.savedDishes.dishes));
             done();
         });
-
     });
 
     it('SPISA-009 :Saved Chefs api', function (done) {
@@ -194,10 +186,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Saved Chefs api response is :: " + JSON.stringify(response.data.savedChefs.chefs));
             done();
         });
-
     });
 
     it('SPISA-010 :Refund User Payment api', function (done) {
@@ -211,10 +202,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Refund User Payment response is :: " + JSON.stringify(response.data.refundUser));
             done();
         });
-
     });
 
     it('SPISA-011 :Forgot Password User api', function (done) {
@@ -228,10 +218,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Forgot Password api response is :: " + JSON.stringify(response.data.forgotPassword));
             done();
         });
-
     });
 
     it('SPISA-012 :Delete User Payment api', function (done) {
@@ -245,10 +234,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Delete User Payment response is :: " + JSON.stringify(response.data.deleteUserPayment));
             done();
         });
-
     });
 
     it('SPISA-013 :Delete Saved Items api', function (done) {
@@ -262,10 +250,9 @@ describe('Test GraphQL API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data.deleteSavedItems));
             done();
         });
-
     });
 
 

@@ -84,52 +84,6 @@ var helperUtil = {},
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   helperUtil.text2codeRatio = function(url, callback){
     if (!isUrl(url)) {
       throw new Error('Invalid url');
@@ -168,7 +122,6 @@ var helperUtil = {},
   };
 
   helperUtil.addStep = function (StepInfo) {
-    console.log(typeof StepInfo,'--stepinfo');
     allure.createStep(StepInfo, function(){
     })();
   };
@@ -193,7 +146,6 @@ var helperUtil = {},
   helperUtil.ReporterElement = function (Expect,expectedResult,failMessage) {
     expect(Expect).toBe(expectedResult);
     if(Expect !== expectedResult){
-
       helperUtil.addStepsWithScreenshot(failMessage);
     }
   };
