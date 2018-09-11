@@ -10,7 +10,7 @@ var util = require('util'),
     JSONData = require('./../testData/testData_' + process.env.NODE_ENV+ '.json');
 
 
-describe('Test GraphQL API queries', function () {
+describe('Test GraphQL USER API queries', function () {
 
     var updateUserQuery,addUserPayment,userPaymentMethods,updateUserPayment,savedPosts,savedDishes,savedChefs,refundUser,forgotPassword,deleteUserPayment,deleteUser,deleteSavedItems,addUserToStripe,addSavedItems;
 
@@ -23,6 +23,10 @@ describe('Test GraphQL API queries', function () {
 
                 }
                 userInfo = payload;
+
+                console.log(">>>>>>>>>>>>>>>>>>>> HOLA  A A  A A A A  >>>>>>>>>>>>>> "+global.userID);
+
+
 
                 updateUserQuery = "mutation { updateUser(user:{id: \"" + global.userID + "\", firstName: \"Keshav\", lastName: \"Seera\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\"}) }";
                 userPaymentMethods = "query{ userPaymentMethods(userId: \"" + global.userID + "\") { type card{ cardId type last4 expMonth expYear } }}";
@@ -47,7 +51,7 @@ describe('Test GraphQL API queries', function () {
         }
     });
 
-    it('SPISA-001 :Update User api', function (done) {
+    it('ZESTY-001 :Update User api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -63,7 +67,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-002 :Add User to Stripe api', function (done) {
+    it('ZESTY-002 :Add User to Stripe api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -79,7 +83,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-003 :Add User Payment api', function (done) {
+    it('ZESTY-003 :Add User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -95,7 +99,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-004 :Update User Payment api', function (done) {
+    it('ZESTY-004 :Update User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -111,7 +115,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-005 :User Payment method api', function (done) {
+    it('ZESTY-005 :User Payment method api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -127,7 +131,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-006 :Add Saved Items api', function (done) {
+    it('ZESTY-006 :Add Saved Items api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -143,7 +147,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-007 :Saved Post api', function (done) {
+    it('ZESTY-007 :Saved Post api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -159,7 +163,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-008 :Saved Dishes api', function (done) {
+    it('ZESTY-008 :Saved Dishes api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -175,7 +179,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-009 :Saved Chefs api', function (done) {
+    it('ZESTY-009 :Saved Chefs api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -191,7 +195,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-010 :Refund User Payment api', function (done) {
+    it('ZESTY-010 :Refund User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -207,7 +211,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-011 :Forgot Password User api', function (done) {
+    it('ZESTY-011 :Forgot Password User api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -223,7 +227,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-012 :Delete User Payment api', function (done) {
+    it('ZESTY-012 :Delete User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -239,7 +243,7 @@ describe('Test GraphQL API queries', function () {
         });
     });
 
-    it('SPISA-013 :Delete Saved Items api', function (done) {
+    it('ZESTY-013 :Delete Saved Items api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
