@@ -13,7 +13,7 @@ exports.config = {
 
     'specs/login_test_spec.js',
     'specs/cook_test_spec.js',
-    //'specs/booking_test_spec.js',
+    'specs/bookings_test_spec.js',
     /*'specs/cooking_test_spec.js',*/
     /*'specs/sample_test_spec.js',*/
 

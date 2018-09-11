@@ -51,7 +51,7 @@ describe('Test GraphQL USER API queries', function () {
         }
     });
 
-    it('ZESTY-001 :Update User api', function (done) {
+    it('ZESTY_USER-001 :Update User api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -67,7 +67,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-002 :Add User to Stripe api', function (done) {
+    it('ZESTY_USER-002 :Add User to Stripe api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -83,7 +83,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-003 :Add User Payment api', function (done) {
+    it('ZESTY_USER-003 :Add User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -99,7 +99,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-004 :Update User Payment api', function (done) {
+    it('ZESTY_USER-004 :Update User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -115,7 +115,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-005 :User Payment method api', function (done) {
+    it('ZESTY_USER-005 :User Payment method api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -131,7 +131,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-006 :Add Saved Items api', function (done) {
+    it('ZESTY_USER-006 :Add Saved Items api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -147,7 +147,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-007 :Saved Post api', function (done) {
+    it('ZESTY_USER-007 :Saved Post api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -163,7 +163,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-008 :Saved Dishes api', function (done) {
+    it('ZESTY_USER-008 :Saved Dishes api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -179,7 +179,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-009 :Saved Chefs api', function (done) {
+    it('ZESTY_USER-009 :Saved Chefs api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -195,7 +195,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-010 :Refund User Payment api', function (done) {
+    it('ZESTY_USER-010 :Refund User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -211,7 +211,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-011 :Forgot Password User api', function (done) {
+    it('ZESTY_USER-011 :Forgot Password User api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -227,7 +227,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-012 :Delete User Payment api', function (done) {
+    it('ZESTY_USER-012 :Delete User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -243,7 +243,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY-013 :Delete Saved Items api', function (done) {
+    it('ZESTY_USER-013 :Delete Saved Items api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
