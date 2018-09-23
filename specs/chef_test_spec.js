@@ -1,4 +1,3 @@
-
 var request = require('graphql-request');
 var rawRequest = require('graphql-request').rawRequest;
 var GraphQLClient = require('graphql-request').GraphQLClient;
@@ -25,7 +24,7 @@ describe('Test GraphQL CHEF API queries', function () {
             updateChefPayoutMethod = "mutation { updateChefPayoutMethod(chefId: \"" + global.userID + "\", payout: { type: ACH, achAccount: { bankName: \"Stripe Test Bank\", type: CHECKING, routingNumber: \"110000000\", accountNumber: \"000123456789\" } }) } ";
             chefPayoutMethod = "query{chefPayoutMethods(chefId: \"" + global.userID + "\") { id accountId last4 routingNumber }}";
             chefsByDish = "query { chefsByDish( dishName: \"Chicken Tikka\", cursor: null, pageSize: 10) { chefs {id emailId firstName lastName } endCursor hasMore } }";
-            createChef = "mutation { createChef( chef: {userId: \"" + global.userID + "\",  cuisines: [\"Chinese\",\"Italian\"], active: true, maxDiners: 10, canFly: false,  chefType: HOME_COOK, address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"16006\", country: \"India\"} }) }";
+            createChef = "mutation { createChef( chef: {userId: \"" + global.userID + "\",  cuisines: [\"Chinese\",\"Italian\"],taxId: \"testing123456\", active: true, maxDiners: 10, canFly: false,  chefType: HOME_COOK, address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"10013\", country: \"India\"},dateOfBirth: \"1991-01-06\" }) }";
             deleteChef = "mutation { deleteChef(id: \"" + global.userID + "\") }";
             deleteChefPayoutMethod = "mutation { deleteChefPayoutMethod(chefId: \"" + global.userID + "\", accountId: \"acct_1CoSlsHOKx7hBtn4\") }";
             featuredChefs = "query{ featuredChefs(chefCount:  10) {id emailId firstName lastName rating reviewCount canFly minEngagementPrice maxDiners active }}";
@@ -60,7 +59,23 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-002 :Add Chef Payout api', function (done) {
+    it('ZESTY_CHEF-002 :Get Chef api', function (done) {
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: getChef}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
+
+    it('ZESTY_CHEF-003 :Add Chef Payout api', function (done) {
 
         helperUtil.addStep("Request Payload :: "+addChefPayout);
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
@@ -77,7 +92,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-003 :Update Chef Payout api', function (done) {
+    it('ZESTY_CHEF-004 :Update Chef Payout api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -93,7 +108,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-004 :Chef Payout Method api', function (done) {
+    it('ZESTY_CHEF-005 :Chef Payout Method api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -109,7 +124,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-005 :Delete Chef Payout api', function (done) {
+    it('ZESTY_CHEF-006 :Delete Chef Payout api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -125,7 +140,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-006 :Update Chef api', function (done) {
+    it('ZESTY_CHEF-007 :Update Chef api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -141,7 +156,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-007 :Get Chef api', function (done) {
+    it('ZESTY_CHEF-008 :Get Chef api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -157,7 +172,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-008 :Featured Chef api', function (done) {
+    it('ZESTY_CHEF-009 :Featured Chef api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -173,7 +188,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-009 :Find Chef api', function (done) {
+    it('ZESTY_CHEF-010 :Find Chef api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -189,7 +204,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-010 :List Chef Transactions api', function (done) {
+    it('ZESTY_CHEF-011 :List Chef Transactions api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -205,7 +220,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-011 :Chef By Dish api', function (done) {
+    it('ZESTY_CHEF-012 :Chef By Dish api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -221,7 +236,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    xit('ZESTY_CHEF-012 :Delete Chef api', function (done) {
+    xit('ZESTY_CHEF-013 :Delete Chef api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',

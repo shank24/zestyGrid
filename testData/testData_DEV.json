@@ -1,7 +1,7 @@
 {
   "AutoTextList": [
     {
-      "BASE_URL": "http://zestypdevpalb-1416730740.us-east-1.elb.amazonaws.com",
+      "BASE_URL": "http://zg-qa-dev-2139977163.us-east-1.elb.amazonaws.com",
       "REDIRECT_URL": "/graphql"
     }
   ],

@@ -1,5 +1,3 @@
-
-
 var request = require('graphql-request');
 var rawRequest = require('graphql-request').rawRequest;
 var GraphQLClient = require('graphql-request').GraphQLClient;
@@ -24,9 +22,9 @@ var helperUtil = {},
         return "query { user(id: \"" + userId+ "\") { id, emailId, firstName, lastName } }"
       }
       else if( type === 'createNewUser') {
-        return "mutation { createUser(user: { emailId: \""+ email.toString() +"\", pwd: \"RT123@11\", firstName: \"Rohit2\", lastName: \"Tiwari2\", cellPhone: \"9876543219\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Noida\", state: \"UP\", zip: \"160066\", country: \"India\"}, dateOfBirth: \"0000-00-00\" }) }"
+        return "mutation { createUser(user: { emailId: \""+ email.toString() +"\", pwd: \"P@ssw0rd\", firstName: \"Alex\", lastName: \"Price\", cellPhone: \"9814644011\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"10013\", country: \"India\"}, dateOfBirth: \"1991-01-06\" }) }"
       } else if(type ==='getUserID'){
-        return "mutation { login(id: \""+ email.toString() +"\", pwd: \"RT123@11\" ) }"
+        return "mutation { login(id: \""+ email.toString() +"\", pwd: \"P@ssw0rd\" ) }"
       }
     }
 
