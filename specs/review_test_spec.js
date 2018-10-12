@@ -13,7 +13,7 @@ var util = require('util'),
 
 describe('Test GraphQL REVIEW API queries', function () {
 
-    var review,isReviewable,reviewTagsForChef,reviewTagsForUser,reviews,submitReview,updateReview;
+    var review,isReviewable,reviewTagsForChef,reviewTagsForUser,reviews,submitReview,updateReview,listChefTransactions;
 
     var newReviewID ="ef03145a-de48-484c-8f1c-db3409aecef4";
 
@@ -40,9 +40,10 @@ describe('Test GraphQL REVIEW API queries', function () {
             addSavedItemsPosts = "mutation {addSavedItems(userId: \"" + global.userID + "\", itemsToAdd: { posts:[\"" + global.postID + "\"] })}";
 
             savedChefs = "query { savedChefs(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { chefs{ id emailId firstName lastName maxDiners minEngagementPrice active rating reviewCount } endCursor hasMore } }";
-            savedDishes = "query { savedDishes(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { dishes{ id name description cuisine isDraft minPrice minDinerSize equipmentNeeded numOfLikes media { type url } } endCursor hasMore } }";
+            savedDishes = "query { savedDishes(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { dishes{ id name description   minPrice minDinerSize equipmentNeeded numOfLikes media { type url } } endCursor hasMore } }";
             savedPosts = "query { savedPosts(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { posts{ id chefId title blurb body isDraft tags numOfLikes media { type url } } endCursor hasMore} }";
 
+            listChefTransactions = "query {listChefTransactions(filters: {startDate: \"2018-08-13\", endDate: \"2018-08-20\", sortOnField: \"date\", sortDescending: true}, cursor: null, pageSize: 10) { transactions{id date bookingDate bookingId dinerName type amount serviceCharge} endCursor  }}";
 
             done();
 
@@ -295,6 +296,8 @@ describe('Test GraphQL REVIEW API queries', function () {
                                 }).then(function (response) {
                                     helperUtil.addStep("Saved Chefs api response is :: " + JSON.stringify(response.data.savedChefs.chefs[0]));
 
+                                    //helperUtil.addStep("Saved Chefs api response is :: " + JSON.stringify(response.errors));
+
                                     done();
                                 });
                             });
@@ -335,6 +338,26 @@ describe('Test GraphQL REVIEW API queries', function () {
                                     done();
                                 });
                             });
+
+
+
+             it('ZESTY_CHEF-015 :List Chef Transactions api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+listChefTransactions);
+
+                    fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                        body: JSON.stringify({query: listChefTransactions}),
+                    }).then(function (res) {
+
+                        return res.json();
+
+                    }).then(function (response) {
+                        helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                        done();
+                    });
+                });
 
 
 });

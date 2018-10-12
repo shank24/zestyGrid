@@ -21,13 +21,15 @@ describe('Test GraphQL POST API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createPost = "mutation { createPost( post: { chefId : \"" + global.userID + "\", title : \"Fungee1\", body : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  tags: [ \"Fungee\" , \"Wiener Schnitzel\", \"Bermuda fish chowder\" ], media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\",size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE } ], isDraft:false }) }";
+            createPost = "mutation { createPost( post: { chefId : \"" + global.userID + "\", title : \"Fungee1\", body : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  tags: [ \"Algae\" , \"Weed\" ], media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\",size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE } ], isDraft:false }) }";
 
             getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
 
             featuredPosts = "query {featuredPosts(postCount: 10) {id chefId title blurb body isDraft tags numOfLikes media{ type url }}}";
 
-            posts = "query {posts(filters: { title: \"furnance\", isDraft: false, tags:[\"Chinese\"] }, cursor: null, pageSize: 6)} { posts{id chefId title blurb body isDraft tags numOfLikes media{ type url }} endCursor hasMore }";
+
+            posts = "query {posts(filters: { title: \"Fun\",  chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6) { posts {id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
+
 
             updatePost = "mutation { updatePost( post: { id: \""+ newPostID +"\", title : \"Fungee123\", body : \"Something Meaningfull\",  tags: [ \"Fungee\" , \"Wiener Schnitzel\", \"Bermuda fish chowder\" ], isDraft:false }) }";
 
@@ -120,7 +122,7 @@ describe('Test GraphQL POST API queries', function () {
             return res.json();
 
         }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
             done();
         });
     });

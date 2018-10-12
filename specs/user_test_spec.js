@@ -153,73 +153,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    /*it('ZESTY_USER-006 :Add Saved Items api', function (done) {
-
-        helperUtil.addStep("Request Payload :: "+addSavedItems);
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: addSavedItems}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Add Saved Items response is :: " + JSON.stringify(response.data.addSavedItems));
-            done();
-        });
-    });
-
-    it('ZESTY_USER-007 :Saved Post api', function (done) {
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: savedPosts}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Saved Post response is :: " + JSON.stringify(response.data.savedPosts.posts));
-            done();
-        });
-    });
-
-    it('ZESTY_USER-008 :Saved Dishes api', function (done) {
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: savedDishes}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Saved Dishes api response is :: " + JSON.stringify(response.data.savedDishes.dishes));
-            done();
-        });
-    });
-
-    it('ZESTY_USER-009 :Saved Chefs api', function (done) {
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: savedChefs}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Saved Chefs api response is :: " + JSON.stringify(response.data.savedChefs.chefs[0]));
-            helperUtil.addStep("Saved Chefs api response is :: " + JSON.stringify(response.data.savedChefs.chefs[1]));
-            done();
-        });
-    });
-*/
-    it('ZESTY_USER-010 :Refund User Payment api', function (done) {
+    it('ZESTY_USER-006 :Refund User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -235,7 +169,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    it('ZESTY_USER-011 :Forgot Password User api', function (done) {
+    it('ZESTY_USER-007 :Forgot Password User api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -251,7 +185,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    xit('ZESTY_USER-012 :Delete User Payment api', function (done) {
+    xit('ZESTY_USER-008 :Delete User Payment api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
@@ -267,7 +201,7 @@ describe('Test GraphQL USER API queries', function () {
         });
     });
 
-    xit('ZESTY_USER-013 :Delete Saved Items api', function (done) {
+    xit('ZESTY_USER-009 :Delete Saved Items api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',

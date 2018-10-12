@@ -26,7 +26,9 @@ describe('Test GraphQL SCHEDULE API queries', function () {
             chefDaySchedule = "query {chefDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\") { date available slots{start end} }}";
             chefWeeklySchedule = "query {chefSchedule(chefId: \"" + global.userID + "\") { daySchedules{ day slots{start end} } }}";
 
-            updateDaySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\", dateSchedule: { date: \"2018-08-10\", available: true, slots: [{ start: \"10:00\", end: \"14:30\" }] }) }";
+            //updateDaySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\", dateSchedule: { date: \"2018-08-10\", available: true, slots: [{ start: \"10:00\", end: \"14:30\" }] }) }";
+            updateDaySchedule = "mutation { updateSchedule(chefId: \"" + global.userID + "\", days: [TUESDAY], slot: { start: \"10:00\", end: \"19:30\" }){ daySchedules{ day slots{start end} } }  }";
+
             updateWeeklySchedule = "mutation { updateSchedule(chefId: \"" + global.userID + "\", weekschedule: { daySchedules: [{day: MONDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"19:00\" }, { start: \"18:00\", end: \"21:00\" }]}, {day: TUESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]}, {day: THURSDAY, slots: [{ start: \"11:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"17:00\", end: \"19:00\" }]} ] }) }";
 
             done();

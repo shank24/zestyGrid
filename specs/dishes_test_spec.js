@@ -23,7 +23,7 @@ describe('Test GraphQL DISHES API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\", , name : \"Chicken Tikka\", description : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  cuisines :[\"Chinese\",\"Italian\"],   approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC ], ingredients : [ \"Red Chillies\", \"Pork\", ], equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 19, minPrice : 92.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
+            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\", , name : \"Chicken Tikka\", description : \"Laborum ad occaecat\",  cuisines :[\"Chinese\",\"Italian\"],   approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC ], ingredients : [ \"Red Chillies\", \"Pork\", ], equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 100, minPrice : 90.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
             calculatePrice = "mutation { calculatePrice(dishId: \""+ newDishID + "\", dinerCount: 1000000) }";
 
 
@@ -33,12 +33,16 @@ describe('Test GraphQL DISHES API queries', function () {
 
 
 
-            dish = "query { dish(id: \""+ newDishID + "\", live: true) { id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
-            dishesByChef = "query {dishesByChef( chefId: \"" + global.userID + "\", pageSize: 10 ) { dishes{id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore }}";
+            dish = "query { dish(id: \""+ newDishID + "\", live: false) { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+            dishesByChef = "query {dishesByChef( chefId: \"" + global.userID + "\", pageSize: 10, next:null, previous:null ) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
 
 
-            featuredDishes = "query { featuredDishes(dishCount: 10) {id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} }";
-            findDishes = "query {findDishes(filters: {cuisines: [\"Chinese\",\"Italian\"], priceMin: 40, priceMax: 300, engagementSize: 6}, cursor: null, pageSize:10, includeChefs:true,chefCount: 3) { dishes{id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore }}";
+            featuredDishes = "query { featuredDishes(dishCount: 10) {id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} }";
+            //findDishes = "query {findDishes(filters: {cuisines: [\"Chinese\",\"Italian\"], priceMin: 90, priceMax: 95, Longitude:77.3910 , latitude:28.5355 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore }}";
+
+            findDishes = "query {findDishes(filters: { Longitude:77.3910 , latitude:28.5355 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore }}";
+
 
             updateDish = "mutation { updateDish( dish: { id: \""+ newDishID + "\", chefId : \"" + global.userID + "\",  name : \"Fungee123\", description : \"Something Meaningfull.\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 171.83, approxPrepTime : 60, dishTypes : [ ORGANIC ], ingredients : [ \"Red Chillies\", \"Pork\", ], equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 19,  media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
 
@@ -81,7 +85,6 @@ describe('Test GraphQL DISHES API queries', function () {
 
     it('ZESTY_DISHES-002 : Calculate Price api', function (done) {
 
-        //console.log("Dish ID is :: >>>>>>>>>>> HOLA >>>>>>>>>>"+dishID);
 
         newDishID= global.dishID;
 
@@ -165,9 +168,7 @@ describe('Test GraphQL DISHES API queries', function () {
         helperUtil.addStep("New Dish ID is :: "+newDishID);
 
 
-        dish = "query { dish(id: \""+ newDishID + "\", live: true) { id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
-
-
+        dish = "query { dish(id: \""+ newDishID + "\", live: false) { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
 
         helperUtil.addStep("Request Payload :: "+dish);
 
@@ -284,14 +285,12 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-012 : Dish api', function (done) {
+     it('ZESTY_DISHES-012 : Re-Test After Updation Dish api', function (done) {
 
             helperUtil.addStep("New Dish ID is :: "+newDishID);
 
 
-            dish = "query { dish(id: \""+ newDishID + "\", live: true) { id chefId name description media {url type} cuisine dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
-
-
+            dish = "query { dish(id: \""+ newDishID + "\", live: false) { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
 
             helperUtil.addStep("Request Payload :: "+dish);
 

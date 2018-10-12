@@ -18,6 +18,8 @@ exports.config = {
       'specs/schedule_test_spec.js',
       'specs/post_test_spec.js',
       'specs/review_test_spec.js',
+      'specs/CTC_test_spec.js',
+      'specs/Specific_Scenarios_test_spec.js'
 
 
       /*'specs/login_test_spec.js',*/
