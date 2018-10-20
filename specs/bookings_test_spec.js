@@ -131,6 +131,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
         }).then(function (response) {
             updatedNewBookingID = response.data.createBooking;
+            global.bookingIDFinal=updatedNewBookingID;
             console.log("New Booking ID :: "+updatedNewBookingID);
 
 

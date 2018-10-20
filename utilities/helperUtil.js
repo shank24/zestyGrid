@@ -19,10 +19,10 @@ var helperUtil = {},
 
     function generateUserQuery ( type, userId) {
       if( type === 'query') {
-        return "query { user(id: \"" + userId+ "\") { id, emailId, firstName, lastName } }"
+        return "query { user(id: \"" + userId+ "\") { id, emailId, firstName, lastName,cellPhone,isChef,campaign,accessToken,profilePic,dateOfBirth,altPhone,address{street1} } }"
       }
       else if( type === 'createNewUser') {
-        return "mutation { createUser(user: { emailId: \""+ email.toString() +"\", pwd: \"P@ssw0rd\", firstName: \"Alex\", lastName: \"Price\", cellPhone: \"9814644011\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"10013\", country: \"India\"}, dateOfBirth: \"1991-01-06\" }) }"
+        return "mutation { createUser(user: { emailId: \""+ email.toString() +"\", pwd: \"P@ssw0rd\", firstName: \"Alex\", lastName: \"Price\", profilePic:\"https://homepages.cae.wisc.edu/~ece533/images/airplane.png\", cellPhone: \"9814644011\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Los Angeles\", state: \"California\", zip: \"90004\", country: \"USA\"}, zipcode: \"90004\" ,dateOfBirth: \"1991-01-06\" }) }"
       } else if(type ==='getUserID'){
         return "mutation { login(id: \""+ email.toString() +"\", pwd: \"P@ssw0rd\" ) }"
       }

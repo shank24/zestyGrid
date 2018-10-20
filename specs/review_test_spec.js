@@ -39,9 +39,10 @@ describe('Test GraphQL REVIEW API queries', function () {
             addSavedItemsDishes = "mutation {addSavedItems(userId: \"" + global.userID + "\", itemsToAdd: { dishes:[\"" + global.dishID + "\"] })}";
             addSavedItemsPosts = "mutation {addSavedItems(userId: \"" + global.userID + "\", itemsToAdd: { posts:[\"" + global.postID + "\"] })}";
 
-            savedChefs = "query { savedChefs(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { chefs{ id emailId firstName lastName maxDiners minEngagementPrice active rating reviewCount } endCursor hasMore } }";
-            savedDishes = "query { savedDishes(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { dishes{ id name description   minPrice minDinerSize equipmentNeeded numOfLikes media { type url } } endCursor hasMore } }";
-            savedPosts = "query { savedPosts(userId: \"" + global.userID + "\", cursor: null, pageSize: 6) { posts{ id chefId title blurb body isDraft tags numOfLikes media { type url } } endCursor hasMore} }";
+            savedChefs = "query { savedChefs(userId: \"" + global.userID + "\", cursor: null, pageSize: 6,next:null, previous:null) { chefs{ id emailId firstName lastName maxDiners minEngagementPrice active rating reviewCount } endCursor hasMore next hasNext previous hasPrevious } }";
+            savedDishes = "query { savedDishes(userId: \"" + global.userID + "\", cursor: null, pageSize: 6,next:null, previous:null) { dishes{ id name description   minPrice minDinerSize equipmentNeeded numOfLikes media { type url } } endCursor hasMore next hasNext previous hasPrevious  } }";
+            savedPosts = "query { savedPosts(userId: \"" + global.userID + "\", cursor: null, pageSize: 6,next:null, previous:null) { posts{ id chefId title blurb body isDraft tags numOfLikes media { type url } } endCursor hasMore next hasNext previous hasPrevious } }";
+
 
             listChefTransactions = "query {listChefTransactions(filters: {startDate: \"2018-08-13\", endDate: \"2018-08-20\", sortOnField: \"date\", sortDescending: true}, cursor: null, pageSize: 10) { transactions{id date bookingDate bookingId dinerName type amount serviceCharge} endCursor  }}";
 

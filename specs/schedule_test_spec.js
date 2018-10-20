@@ -13,23 +13,26 @@ var util = require('util'),
 
 describe('Test GraphQL SCHEDULE API queries', function () {
 
-    var chefDaySchedule,chefWeeklySchedule,createDaySchedule,createWeeklySchedule,updateDaySchedule,updateWeeklySchedule;
+    var chefDaySchedule,chefWeeklySchedule,createDaySchedule,createWeeklySchedule,updateDaySchedule,updateWeeklySchedule,deleteSlotForDay,deleteSlotForDate;
 
 
     beforeEach(function (done) {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createDaySchedule = "mutation { createDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\", dateSchedule: { date: \"2018-08-13\", available: true, slots: [{ start: \"10:00\", end: \"15:00\" }] }) }";
-            createWeeklySchedule = "mutation { createSchedule(chefId: \"" + global.userID + "\", weekschedule: { daySchedules: [{day: MONDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]}, {day: TUESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]}, {day: WEDNESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]} ] }) }";
+            createDaySchedule = "mutation { createDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05\", dateSchedule: { date: \"2018-10-05\", available: true, slots: [{ start: \"10:00\", end: \"15:00\" }] }) }";
+            createWeeklySchedule = "mutation { createSchedule(chefId: \"" + global.userID + "\", weekschedule: { daySchedules: [{day: FRIDAY, slots: [{ start: \"10:00\", end: \"11:00\" }, { start: \"12:00\", end: \"13:00\" }, { start: \"13:00\", end: \"15:00\" }]}, {day: TUESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]}, {day: WEDNESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]} ] }) }";
 
-            chefDaySchedule = "query {chefDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\") { date available slots{start end} }}";
+            chefDaySchedule = "query {chefDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05\") { date available slots{start end} }}";
             chefWeeklySchedule = "query {chefSchedule(chefId: \"" + global.userID + "\") { daySchedules{ day slots{start end} } }}";
 
-            //updateDaySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-08-10\", dateSchedule: { date: \"2018-08-10\", available: true, slots: [{ start: \"10:00\", end: \"14:30\" }] }) }";
             updateDaySchedule = "mutation { updateSchedule(chefId: \"" + global.userID + "\", days: [TUESDAY], slot: { start: \"10:00\", end: \"19:30\" }){ daySchedules{ day slots{start end} } }  }";
+            updateWeeklySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05\",   slot: { start: \"10:00\", end: \"14:30\" }) { date available slots{start end} } }";
 
-            updateWeeklySchedule = "mutation { updateSchedule(chefId: \"" + global.userID + "\", weekschedule: { daySchedules: [{day: MONDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"19:00\" }, { start: \"18:00\", end: \"21:00\" }]}, {day: TUESDAY, slots: [{ start: \"10:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"18:00\", end: \"20:00\" }]}, {day: THURSDAY, slots: [{ start: \"11:00\", end: \"13:00\" }, { start: \"15:00\", end: \"17:00\" }, { start: \"17:00\", end: \"19:00\" }]} ] }) }";
+            deleteSlotForDay= "mutation { deleteSlotForDay(chefId: \"" + global.userID + "\", day: FRIDAY, slot: { start: \"10:00\", end: \"11:00\" }) }";
+            deleteSlotForDate= "mutation { deleteSlotForDate(chefId: \"" + global.userID + "\", date: \"2018-10-05\", slot: { start: \"10:00\", end: \"15:00\" }) }";
+
+
 
             done();
 
@@ -183,5 +186,43 @@ describe('Test GraphQL SCHEDULE API queries', function () {
                 done();
             });
         });
+
+
+        it('ZESTY_SCHEDULE-009 :Delete Slot Day api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+deleteSlotForDay);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: deleteSlotForDay}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                    done();
+                });
+            });
+
+            it('ZESTY_SCHEDULE-010 :Delete Slot Date api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+deleteSlotForDate);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: deleteSlotForDate}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                    done();
+                });
+            });
+
 
 });

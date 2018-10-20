@@ -24,9 +24,9 @@ describe('Test GraphQL CHEF API queries', function () {
             updateChefPayoutMethod = "mutation { updateChefPayoutMethod(chefId: \"" + global.userID + "\", payout: { type: ACH, achAccount: { bankName: \"Stripe Test Bank\", type: CHECKING, routingNumber: \"110000000\", accountNumber: \"000123456789\" } }) } ";
             chefPayoutMethod = "query{chefPayoutMethods(chefId: \"" + global.userID + "\") { id accountId last4 routingNumber }}";
 
-            chefsByDish = "query { chefsByDish( dishName: \"Chicken Tikka\", cursor: null, pageSize: 10) { chefs {id emailId firstName lastName } endCursor hasMore } }";
+            chefsByDish = "query { chefsByDish( dishName: \"Palak Paneer\", cursor: null, pageSize: 10) { chefs {id emailId firstName lastName maxTravelDistance} endCursor hasMore } }";
 
-            createChef = "mutation { createChef( chef: {userId: \"" + global.userID + "\",  cuisines: [\"Chinese\",\"Italian\"],taxId: \"testing123456\", maxDiners:100, minEngagementPrice:25.23, active: true, canFly: false, geoLocation: { type: \"Point\", coordinates:[77.3910,28.5355] },  chefType: HOME_COOK, address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"10013\", country: \"India\"},dateOfBirth: \"1991-01-06\" }) }";
+            createChef = "mutation { createChef( chef: {userId: \"" + global.userID + "\",  cuisines: [\"Chinese\",\"Italian\"], taxId: \"testing123456\", maxDiners:200, minEngagementPrice:125.23, active: true, canFly: false, geoLocation: { type: \"Point\", coordinates:[-119.417931,36.778259] },  chefType: HOME_COOK, address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Los Angeles\", state: \"California\", zip: \"90004\", country: \"USA\"} ,dateOfBirth: \"1991-01-06\" }) }";
 
             deleteChef = "mutation { deleteChef(id: \"" + global.userID + "\") }";
             deleteChefPayoutMethod = "mutation { deleteChefPayoutMethod(chefId: \"" + global.userID + "\", accountId: \"acct_1CoSlsHOKx7hBtn4\") }";
@@ -36,9 +36,9 @@ describe('Test GraphQL CHEF API queries', function () {
             getChef =  "query { chef(id: \"" + global.userID + "\", dishCount: 3, postCount: 3) { id firstName lastName taxId emailId maxDiners minEngagementPrice canFly completedSetupStep dateOfBirth profilePic address {street1 street2} } }";
 
             listChefTransactions = "query {listChefTransactions(filters: {startDate: \"2018-07-15\", endDate: \"2018-08-05\", sortOnField: \"date\", sortDescending: true}, cursor: null, pageSize: 10) { transactions{id date bookingDate bookingId dinerName type amount serviceCharge} endCursor  }}";
-            updateChef = "mutation { updateChef( chef: {userId: \"" + global.userID + "\", taxId: \"testing123456\",  active: true, maxDiners: 20, canFly: true, completedSetupStep:2, dateOfBirth: \"1991-01-06\", address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Mohali\", state: \"Punjab\", zip: \"16006\", country: \"India\"} })}";
+            updateChef = "mutation { updateChef( chef: {userId: \"" + global.userID + "\", taxId: \"testing123456\",  active: true, maxDiners: 20, canFly: true, completedSetupStep:2, dateOfBirth: \"1991-01-06\",geoLocation: { type: \"Point\", coordinates:[-119.417931,36.778259] }, address: { street1: \"711 Floor 7, Bestech Business Towers\", street2: \"Sector 66, Phase XI\", city: \"Los Angeles\", state: \"California\", zip: \"90004\", country: \"USA\"} })}";
 
-            createCandidate = "mutation { createCandidate(chef: {firstName: \"Alex\", lastName: \"Price\", email: \"" + global.emailID+ "\", phone: \"9814644011\", dob: \"1991-01-06\", ssn: \"111-11-2001\", zipcode: \"10013\"}) }";
+            createCandidate = "mutation { createCandidate(chef: {firstName: \"Alex\", lastName: \"Price\", email: \"" + global.emailID+ "\", phone: \"9814644011\", dob: \"1991-01-06\", ssn: \"111-11-2001\", zipcode: \"90004\"}) }";
 
 
 
@@ -156,7 +156,7 @@ describe('Test GraphQL CHEF API queries', function () {
         });
     });
 
-    it('ZESTY_CHEF-007 :Delete Chef Payout api', function (done) {
+    xit('ZESTY_CHEF-007 :Delete Chef Payout api', function (done) {
 
         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
             method: 'POST',
