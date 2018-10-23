@@ -22,7 +22,7 @@ describe('Test GraphQL REVIEW API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            submitReview = "mutation { submitReview(review: { reviewer: \"" + global.userID + "\", reviewee: \"" + global.userID + "\", reviewerName: \"Charneet Keet\", reviewType: DISH, rating: 4.5, tags: \"Value\", body: \"Value\" }) }";
+            submitReview = "mutation { submitReview(review: { reviewer: \"" + global.userID + "\", reviewee: \"" + global.userID + "\",  bookingId:\"" + global.bookingIDFinal + "\", reviewerName: \"Charneet Keet\", reviewType: CHEF, rating: 4.5, tags: \"Value\", body: \"Value\" }) }";
 
             review = "query {review(id: \""+ newReviewID + "\") {id reviewer reviewerName reviewee rating tags body reviewType } }";
 

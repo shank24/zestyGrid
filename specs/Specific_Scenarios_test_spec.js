@@ -20,6 +20,7 @@ describe('Test Q Series Specific Scenarios API', function () {
     var newCardId = 'card_1CaC5IJt7gce93gZgTTYcP2Y';
     var newDishID ="ef03145a-de48-484c-8f1c-db3409aecef4";
     var newPostID = "ef03145a-de48-484c-8f1c-db3409aecef4";
+    var newDishID ="ef03145a-de48-484c-8f1c-db3409aecef4";
 
     var addChefPayout,chefPayoutMethod,chefsByDish,updateChef,updateChefPayoutMethod,findChefs;
 
@@ -68,7 +69,6 @@ describe('Test Q Series Specific Scenarios API', function () {
 
 
 
-
             dishesByChef = "query {dishesByChef( chefId: \"" + global.userID + "\", pageSize: 10, next:null, previous:null ) { dishes{id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
 
             dishesByChef_1 = "query {dishesByChef( chefId: \"" + global.userID +123+ "\", pageSize: 10, next:null, previous:null  ) { dishes{id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
@@ -78,6 +78,20 @@ describe('Test Q Series Specific Scenarios API', function () {
             dishesByChef_3 = "query {dishesByChef( chefId: \"" + global.userID + "\", pageSize: 10, live:true, next:null, previous:null ) { dishes{id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
 
 
+            findDishes_1 = "query {findDishes(filters: { longitude:-119.417931 , latitude:36.778259}, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_2 = "query {findDishes(filters: { }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_3 = "query {findDishes(filters: { cuisines: [\"Chinese\",\"Italian\"] }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_4 = "query {findDishes(filters: { dishes:[\"Palak Paneer\"] }, cursor: null, pageSize:10, includeChefs:true,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_5 = "query {findDishes(filters: { cuisines: [\"Chinese\"] }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_6 = "query {findDishes(filters: { priceMin:80 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
+            findDishes_7 = "query {findDishes(filters: { priceMin:150 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
+
 
              posts = "query {posts(filters: { title: \"Fun\",  chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6) { posts {id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
@@ -85,7 +99,7 @@ describe('Test Q Series Specific Scenarios API', function () {
 
              posts_2 = "query {posts(filters: { title: \"Fungee\",  chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6) { posts {id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
-             posts_3 = "query {posts(filters: { tags: [ \"Algae\"] , chefId:  \"" + global.userID + "\" }) { posts { id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
+             posts_3 = "query {posts(filters: { tags: [ \"Algae\"] }) { posts { id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
              posts_4 = "query {posts(filters: { tags: [ \"Algae\"], title: \"Fungee\" ,chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6,next:null, previous:null) { posts { id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
@@ -93,7 +107,7 @@ describe('Test Q Series Specific Scenarios API', function () {
 
              user_1 = "query { user(id: \"" + global.userID +123+ "\") { id, emailId, firstName, lastName,cellPhone,isChef,campaign,accessToken,profilePic,dateOfBirth,altPhone,address{street1} } }";
 
-             user = "query { user(id: \"" + global.userID + "\") { id, emailId, firstName, lastName,cellPhone,isChef,campaign,accessToken,profilePic,dateOfBirth,altPhone,address{street1} } }";
+             user = "query { user(id: \"" + global.userID + "\") { id emailId firstName lastName cellPhone isChef campaign accessToken profilePic dateOfBirth altPhone address{street1} paymentInfo{ type card{ cardId type last4 } } } }";
 
 
              savedChefs_1 = "query { savedChefs(userId: \"" + global.userID + 123 + "\", cursor: null, pageSize: 6) { chefs{ id emailId firstName lastName maxDiners minEngagementPrice active rating reviewCount } endCursor hasMore } }";
@@ -111,25 +125,6 @@ describe('Test Q Series Specific Scenarios API', function () {
              savedPosts_2 = "query { savedPosts(userId: \"" + global.userID +  "\", cursor: null, pageSize: 6,next:null, previous:null) { posts{ id chefId title blurb body isDraft tags numOfLikes media { type url } } endCursor hasMore next hasNext previous hasPrevious} }";
 
 
-
-             findDishes_1 = "query {findDishes(filters: { longitude:-119.417931 , latitude:36.778259}, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_2 = "query {findDishes(filters: { }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_3 = "query {findDishes(filters: { cuisines: [\"Chinese\",\"Italian\"] }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_4 = "query {findDishes(filters: { dishes:[\"Palak Paneer\"] }, cursor: null, pageSize:10, includeChefs:true,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_5 = "query {findDishes(filters: { cuisines: [\"Chinese\"] }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_6 = "query {findDishes(filters: { priceMin:80 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-             findDishes_7 = "query {findDishes(filters: { priceMin:150 }, cursor: null, pageSize:10, includeChefs:true,chefCount: 3,next:null, previous:null) { dishes{id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious }}";
-
-
-             getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
-
-
              reviewTagsForChef = "query { reviewTagsForChef(userId: \"" + global.userID + "\") } ";
 
 
@@ -142,10 +137,44 @@ describe('Test Q Series Specific Scenarios API', function () {
 
              getChef_1 =  "query { chef(id: \"" + global.userID + 123 + "\", dishCount: 3, postCount: 3) { id firstName lastName taxId emailId maxDiners minEngagementPrice canFly completedSetupStep dateOfBirth profilePic address {street1 street2} } }";
 
+             getChef_2 =  "query { chef(id: \"" + global.userID + "\") { id firstName lastName taxId emailId maxDiners minEngagementPrice canFly completedSetupStep dateOfBirth profilePic address {street1 street2}  payoutMethod { id accountId last4 routingNumber } } }";
+
+             getChef_3 =  "query { chef(id: \"" + global.userID + "\") { id firstName lastName emailId maxDiners minEngagementPrice canFly active address{ street1 street2 } dishesList{ dishes{id name cuisines} hasMore next } } } ";
+
 
              reviews = "query { reviews(filters: {reviewee: \"" + global.userID + "\", reviewType: DISH}, cursor: null, pageSize: 6) { reviews{id reviewer reviewerName reviewee rating bookingId tags body reviewType} endCursor hasMore } }";
 
-             reviews_1 = "query { reviews(filters: {reviewee: \"" + global.userID + "\", reviewType: DISH, bookingId:\"" + global.bookingIDFinal + "\" }, cursor: null, pageSize: 6) { reviews{id reviewer reviewerName reviewee rating bookingId tags body reviewType} endCursor hasMore } }";
+             reviews_1 = "query { reviews(filters: {reviewee: \"" + global.userID + "\", reviewType: CHEF, bookingId:\"" + global.bookingIDFinal + "\" }, cursor: null, pageSize: 6) { reviews{id reviewer reviewerName reviewee rating bookingId tags body reviewType} endCursor hasMore } }";
+
+
+
+             dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+
+             getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
+
+
+             cuisines = "query { cuisines(country: \"US\") }";
+
+
+             userBookings_1 = "query { userBookings(userId: \"" + global.userID + "\", status: INCOMPLETE, cursor: null, pageSize: 6) {bookings{ id chefId  date   chefReviewId } endCursor hasMore } }";
+
+             userBookings_2 = "query { userBookings(userId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,next:null, previous:null) {bookings{ id chefId  date   chefReviewId } endCursor hasMore next hasNext previous hasPrevious} }";
+
+             userBookings_3 = "query { userBookings(userId: \"" + global.userID + "\", status: COMPLETED_BY_CHEF, cursor: null, pageSize: 6) {bookings{ id chefId  date   chefReviewId } endCursor hasMore} }";
+
+             userBookings_4 = "query { userBookings(userId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,next:null, previous:null) {bookings{ id chefId  date   chefReviewId } endCursor hasMore next hasNext previous hasPrevious} }";
+
+
+             chefBookings_1 =  "query { chefBookings(chefId: \"" + global.userID + "\", status: INCOMPLETE, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
+
+             chefBookings_2 =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15,next:null, previous:null) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore next hasNext previous hasPrevious} }";
+
+             chefBookings_3 =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
+
+             chefBookings_4 =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
+
+
 
 
 
@@ -1092,7 +1121,7 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
 
 
 
-            it('43-With Valid Case : Get Available Dishes api', function (done) {
+            it('43-With Invalid Country Code Case : Get Available Dishes api', function (done) {
 
                                       helperUtil.addStep("Request Payload :: "+getAvailableDishes_1);
 
@@ -1112,20 +1141,20 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
 
 
 
-            it('44-With-Common_TCs_02 : Get Available Dishes api', function (done) {
+            it('44-With-Common_TCs_01 : Get Available Dishes api', function (done) {
 
-                                                 helperUtil.addStep("Request Payload :: "+getAvailableDishes_1);
+                                                 helperUtil.addStep("Request Payload :: "+getAvailableDishes);
 
                                                  fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
                                                      method: 'POST',
-                                                     headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-                                                     body: JSON.stringify({query: getAvailableDishes_1}),
+                                                     headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + "123"},
+                                                     body: JSON.stringify({query: getAvailableDishes}),
                                                  }).then(function (res) {
 
                                                      return res.json();
 
                                                  }).then(function (response) {
-                                                     helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                                                     helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
                                                      done();
                                                  });
             });
@@ -1133,18 +1162,18 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
 
              it('45-With_Common_TCs_02 : Get Available Dishes api', function (done) {
 
-                                                  helperUtil.addStep("Request Payload :: "+getAvailableDishes_1);
+                                                  helperUtil.addStep("Request Payload :: "+getAvailableDishes);
 
                                                   fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
                                                       method: 'POST',
                                                       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-                                                      body: JSON.stringify({query: getAvailableDishes_1}),
+                                                      body: JSON.stringify({query: getAvailableDishes}),
                                                   }).then(function (res) {
 
                                                       return res.json();
 
                                                   }).then(function (response) {
-                                                      helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                                                      helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
                                                       done();
                                                   });
                });
@@ -1170,8 +1199,47 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
                   });
 
 
+            it('47-With Payment Method :Get Chef api', function (done) {
 
-               it('47-With_Valid_Values :Get Chef api', function (done) {
+                                  helperUtil.addStep("Request Payload :: "+getChef_2);
+
+                                  fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                                      method: 'POST',
+                                      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                                      body: JSON.stringify({query: getChef_2}),
+                                  }).then(function (res) {
+
+                                      return res.json();
+
+                                  }).then(function (response) {
+                                      helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                                      done();
+                                  });
+             });
+
+
+             it('48-With Dishes List :Get Chef api', function (done) {
+
+                                               helperUtil.addStep("Request Payload :: "+getChef_3);
+
+                                               fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                                                   method: 'POST',
+                                                   headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                                                   body: JSON.stringify({query: getChef_3}),
+                                               }).then(function (res) {
+
+                                                   return res.json();
+
+                                               }).then(function (response) {
+                                                   helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                                                   done();
+                                               });
+             });
+
+
+
+
+               it('49-With_Valid_Values :Get Chef api', function (done) {
 
                          helperUtil.addStep("Request Payload :: "+getChef);
 
@@ -1190,7 +1258,7 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
                      });
 
 
-                      it('48-With_Valid_Data :Reviews Filtered api', function (done) {
+                      it('50-With_Valid_Data :Reviews Filtered api', function (done) {
 
                            helperUtil.addStep("Request Payload :: "+reviews);
 
@@ -1211,7 +1279,7 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
                        });
 
 
-                          it('49-With_Booking_ID :Reviews Filtered api', function (done) {
+                          it('51-With_Booking_ID :Reviews Filtered api', function (done) {
 
                                helperUtil.addStep("Request Payload :: "+reviews_1);
 
@@ -1231,6 +1299,321 @@ it('23-With Invalid Chef :Saved Chefs api', function (done) {
                                });
                            });
 
+
+        it('52-With-Common_TCs_01 :Reviews Filtered api', function (done) {
+
+                           helperUtil.addStep("Request Payload :: "+reviews);
+
+
+
+                           fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                               method: 'POST',
+                               headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + "123"},
+                               body: JSON.stringify({query: reviews}),
+                           }).then(function (res) {
+
+                               return res.json();
+
+                           }).then(function (response) {
+                               helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                               done();
+                           });
+                       });
+
+        it('53-With-Common_TCs_02 :Reviews Filtered api', function (done) {
+
+                           helperUtil.addStep("Request Payload :: "+reviews);
+
+
+
+                           fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                               method: 'POST',
+                               headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken+"123"},
+                               body: JSON.stringify({query: reviews}),
+                           }).then(function (res) {
+
+                               return res.json();
+
+                           }).then(function (response) {
+                               helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                               done();
+                           });
+                       });
+
+
+        it('54-Valid Dish Exists :  Dish api', function (done) {
+
+                helperUtil.addStep("New Dish ID is :: "+newDishID);
+
+                newDishID= global.dishID;
+                dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+                helperUtil.addStep("Request Payload :: "+dish);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: dish}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                    done();
+                });
+            });
+
+        it('55-Invalid Dish Non Exists : Dish api', function (done) {
+
+                helperUtil.addStep("New Dish ID is :: "+newDishID);
+
+                newDishID= global.dishID;
+
+                dish = "query { dish(id: \""+ newDishID + "123"+ "\") { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+                helperUtil.addStep("Request Payload :: "+dish);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: dish}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                    done();
+                });
+            });
+
+        it('56-With-Common_TCs_01 : Dish api', function (done) {
+
+                helperUtil.addStep("New Dish ID is :: "+newDishID);
+
+
+                newDishID= global.dishID;
+
+                dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+                helperUtil.addStep("Request Payload :: "+dish);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' +"123"},
+                    body: JSON.stringify({query: dish}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                    done();
+                });
+            });
+
+        it('57-With-Common_TCs_02: Dish api', function (done) {
+
+                helperUtil.addStep("New Dish ID is :: "+newDishID);
+
+                newDishID= global.dishID;
+
+                dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+
+                helperUtil.addStep("Request Payload :: "+dish);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken+"123"},
+                    body: JSON.stringify({query: dish}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                    done();
+                });
+            });
+
+
+        it('58-With Valid Country Code : Cuisine api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+cuisines);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: cuisines}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                    done();
+                });
+            });
+
+
+         it('59-Incomplete-Booking : User Booking api', function (done) {
+
+                    helperUtil.addStep("Request Payload :: "+userBookings_1);
+
+                    fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                        body: JSON.stringify({query: userBookings_1}),
+                    }).then(function (res) {
+
+                        return res.json();
+
+                    }).then(function (response) {
+                        helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+
+                        done();
+                    });
+                });
+
+         it('60-With Pagination Based : User Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+userBookings_2);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: userBookings_2}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
+
+         it('61-With Specific Booking_STATE : User Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+userBookings_3);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: userBookings_3}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
+
+         it('62-With Authenticated User : User Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+userBookings_4);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: userBookings_4}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
+
+
+
+         it('63-With Incomplete-Booking : Chef Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+chefBookings_1);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: chefBookings_1}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+
+                         done();
+                     });
+                 });
+
+         it('64-With Pagination Based : Chef Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+chefBookings_2);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: chefBookings_2}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
+
+         it('65-Without Start Date & Num-Weeks : Chef Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+chefBookings_3);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: chefBookings_3}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
+
+         it('66-With Authenticated User : Chef Booking api', function (done) {
+
+                     helperUtil.addStep("Request Payload :: "+chefBookings_4);
+
+                     fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                         method: 'POST',
+                         headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                         body: JSON.stringify({query: chefBookings_4}),
+                     }).then(function (res) {
+
+                         return res.json();
+
+                     }).then(function (response) {
+
+                         helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                         done();
+                     });
+                 });
 
 
 });
