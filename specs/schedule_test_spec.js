@@ -27,7 +27,7 @@ describe('Test GraphQL SCHEDULE API queries', function () {
             chefWeeklySchedule = "query {chefSchedule(chefId: \"" + global.userID + "\") { daySchedules{ day slots{start end} } }}";
 
             updateDaySchedule = "mutation { updateSchedule(chefId: \"" + global.userID + "\", days: [TUESDAY], slot: { start: \"10:00\", end: \"19:30\" }){ daySchedules{ day slots{start end} } }  }";
-            updateWeeklySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05\",   slot: { start: \"10:00\", end: \"14:30\" }) { date available slots{start end} } }";
+            updateWeeklySchedule = "mutation { updateDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05userID\",   slot: { start: \"10:00\", end: \"14:30\" }) { date available slots{start end} } }";
 
             deleteSlotForDay= "mutation { deleteSlotForDay(chefId: \"" + global.userID + "\", day: FRIDAY, slot: { start: \"10:00\", end: \"11:00\" }) }";
             deleteSlotForDate= "mutation { deleteSlotForDate(chefId: \"" + global.userID + "\", date: \"2018-10-05\", slot: { start: \"10:00\", end: \"15:00\" }) }";
@@ -201,7 +201,7 @@ describe('Test GraphQL SCHEDULE API queries', function () {
                     return res.json();
 
                 }).then(function (response) {
-                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.errors));
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
                     done();
                 });
             });

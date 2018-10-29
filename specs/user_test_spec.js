@@ -39,6 +39,13 @@ describe('Test GraphQL USER API queries', function () {
                 addUserToStripe = "mutation {addUserToStripe(userId: \"" + global.userID + "\")}";
                 addUserPayment = "mutation {addUserPayment( userId: \"" + global.userID + "\", payment: { type: CARD, card: { number: \"378282246310005\", expMonth: 2, expYear: 2023, cvc: 321 } } )}";
 
+                updateUserQuery_1 = "mutation { updateUser(user:{id: \"" + global.userID + "\", firstName: \"Keshav123\", lastName: \"Seera\", pwd: \"P@ssw0rd\",emailId:\"charan@zestygrid.com\",profilePic:\"https://homepages.cae.wisc.edu/~ece533/images/airplane.png\",cellPhone: \"9814644012\",dateOfBirth: \"1995-01-06\"}) }";
+
+                updateUserQuery_2 = "mutation { updateUser(user:{id: \"" + global.userID + "\", firstName: \"Keshav\", lastName: \"Seera\", pwd: \"P@ssw01rd\",emailId:\"charan@zestygrid.com\",profilePic:\"https://homepages.cae.wisc.edu/~ece533/images/airplane.png\",cellPhone: \"9814644011\",dateOfBirth: \"1991-01-06\"}) }";
+
+                user = "query { user(id: \"" + global.userID + "\") { id emailId firstName lastName cellPhone isChef campaign accessToken profilePic dateOfBirth altPhone address{street1} paymentInfo{ type card{ cardId type last4 } } } }";
+
+
 
 
 
@@ -218,7 +225,77 @@ describe('Test GraphQL USER API queries', function () {
     });
 
 
+        it('ZESTY_USER-010 Updating Some Fields :Update User api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+updateUserQuery_1);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: updateUserQuery_1}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + response.data.updateUser);
+                done();
+            });
+        });
+
+             it('ZESTY_USER-011 Check for Updates:Q1_User', function (done) {
+
+                                 helperUtil.addStep("Request Payload :: "+user);
+
+                                 fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                                     method: 'POST',
+                                     headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                                     body: JSON.stringify({query: user}),
+                                 }).then(function (res) {
+
+                                     return res.json();
+
+                                 }).then(function (response) {
+                                     helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                                     done();
+                                 });
+                             });
+
+        it('ZESTY_USER-012 Updating Password :Update User api', function (done) {
+
+                    helperUtil.addStep("Request Payload :: "+updateUserQuery_2);
+
+                    fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                        body: JSON.stringify({query: updateUserQuery_2}),
+                    }).then(function (res) {
+
+                        return res.json();
+
+                    }).then(function (response) {
+                        helperUtil.addStep("Updated response is :: " + response.data.updateUser);
+                        done();
+                    });
+                });
 
 
+          it('ZESTY_USER-013 Check for Updates:Q1_User', function (done) {
+
+                         helperUtil.addStep("Request Payload :: "+user);
+
+                         fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                             method: 'POST',
+                             headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                             body: JSON.stringify({query: user}),
+                         }).then(function (res) {
+
+                             return res.json();
+
+                         }).then(function (response) {
+                             helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                             done();
+                         });
+                     });
 
 });

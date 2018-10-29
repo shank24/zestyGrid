@@ -31,7 +31,7 @@ describe('Test GraphQL POST API queries', function () {
             posts = "query {posts(filters: { title: \"Fun\",  chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6) { posts {id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
 
-            updatePost = "mutation { updatePost( post: { id: \""+ newPostID +"\", title : \"Fungee123\", body : \"Something Meaningfull\",  tags: [ \"Fungee\" , \"Wiener Schnitzel\", \"Bermuda fish chowder\" ], isDraft:false }) }";
+            updatePost = "mutation { updatePost( post: { chefId:  \"" + global.userID + "\", id: \""+ newPostID +"\", title : \"Fungee123\", body : \"Something Meaningfull\",  tags: [ \"Fungee\" , \"Wiener Schnitzel\", \"Bermuda fish chowder\" ], isDraft:false }) }";
 
             deletePost = "mutation { deletePost(id: \""+ newPostID +"\") }";
 
