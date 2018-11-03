@@ -259,9 +259,29 @@ describe('Test Q Series Specific Scenarios API', function () {
             markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
             markBookingAsCompleted_1 = "mutation { markBookingAsCompleted(id: \"" + global.userID + 123 + "\", bookingId: \""+ updatedNewBookingID +"\") }";
 
-
-
             createBooking = "mutation { createBooking(bookingId: \""+ newBookingID +"\" ) }";
+
+//
+            chefDaySchedule_1 = "query {chefDaySchedule(chefId: \"" + global.userID + "\", date: \"2018-10-05\") { date available slots{start end} }}";
+            chefDaySchedule = "query {chefDaySchedule(chefId: \"" + global.userID + "\", date: \"2000-00-00\") { date available slots{start end} }}";
+
+            chefWeeklySchedule = "query {chefSchedule(chefId: \"" + global.userID + "\") { daySchedules{ day slots{start end} } }}";
+
+
+
+            //Invalid User
+            reserveChefSlot_1 = "mutation { reserveChefSlot(chefId: \"" + global.userID + 123 +"\", userId: \"" + global.userID + 123 + "\", day: \"2018-08-13\", slot: {start: \"11:30\", end: \"14:00\"}) }";
+
+            //Invalid Date
+            reserveChefSlot_2 = "mutation { reserveChefSlot(chefId: \"" + global.userID + "\", userId: \"" + global.userID + "\", day: \"2018-08-53\", slot: {start: \"11:30\", end: \"14:00\"}) }";
+
+
+            //Out of Slot
+            reserveChefSlot_3 = "mutation { reserveChefSlot(chefId: \"" + global.userID + "\", userId: \"" + global.userID + "\", day: \"2018-11-02\", slot: {start: \"22:30\", end: \"23:00\"}) }";
+
+
+
+
 
 
             done();
@@ -2592,6 +2612,7 @@ describe('Test Q Series Specific Scenarios API', function () {
          });
 
 //UpdateReview
+
         it('99_12-ZESTY_REVIEW-007 Invalid Review ID:Update Review api', function (done) {
 
                 newReviewID= global.reviewID;
@@ -2729,10 +2750,121 @@ describe('Test Q Series Specific Scenarios API', function () {
 
 
 
+//chefDaySchedule
+
+
+    it('99_17-ZESTY_SCHEDULE-003 When Dates Are NULL :Chef Day Schedule api', function (done) {
+
+        helperUtil.addStep("Request Payload :: "+chefDaySchedule);
+
+        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+            body: JSON.stringify({query: chefDaySchedule}),
+        }).then(function (res) {
+
+            return res.json();
+
+        }).then(function (response) {
+            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            done();
+        });
+    });
 
 
 
+    it('99_18-ZESTY_SCHEDULE-004 With Slots Defined :Chef Day Schedule api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+chefDaySchedule_1);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: chefDaySchedule_1}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
 
 
+    it('99_19-ZESTY_SCHEDULE-004 :Chef Weekly Schedule api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+chefWeeklySchedule);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: chefWeeklySchedule}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
+
+
+    it('99_20-ZESTY_BOOKINGS-001 Invalid User : Reserve Chef Slot api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+reserveChefSlot_1);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: reserveChefSlot_1}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
+
+    it('99_21-ZESTY_BOOKINGS-001 Invalid Date Format: Reserve Chef Slot api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+reserveChefSlot_2);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: reserveChefSlot_2}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
+
+
+
+    it('99_22-ZESTY_BOOKINGS-001 Out of Slot : Reserve Chef Slot api', function (done) {
+
+            helperUtil.addStep("Request Payload :: "+reserveChefSlot_3);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: reserveChefSlot_3}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
 
 });

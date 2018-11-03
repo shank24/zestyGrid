@@ -21,7 +21,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
             helperUtil.envInfo();
 
             createInProgressBooking = "mutation { createInProgressBooking(booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", date: \"2018-08-13\", timeSlot: { start: \"11:00\", end: \"13:00\"}, dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }] ,  equipmentsPresent: [\"Microwave Oven\", \"Grill\", \"Gas\"], cardId: \"" + global.cardID + "\",   }) }";
-            updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\",   }) }";
+            updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\", dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }]  }) }";
 
             createBooking = "mutation { createBooking(bookingId: \""+ newBookingID +"\" ) }";
             updateBooking = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: COMPLETED ) }";
@@ -32,10 +32,14 @@ describe('Test GraphQL BOOKINGS API queries', function () {
             userBookings = "query { userBookings(userId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6) {bookings{ id chefId  date   chefReviewId } endCursor hasMore} }";
             chefBookings =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
 
+            userBookings_1 = "query { userBookings(userId: \"" + global.userID + "\", status: INCOMPLETE, cursor: null, pageSize: 6) {bookings{ id chefId date timeSlot{start end} dishes{ dishId serves cuisines dishName price} chefReviewId } endCursor hasMore} }";
+
             updateBooking_1 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: REJECTED, rejectReason: \"Not On Time\" ) }";
             updateBooking_2 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: CANCELLED, rejectReason: \"Not On Time AGAIN\" ) }";
             updateBooking_3 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: ACCEPTED) }";
             updateBooking_4 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: COMPLETED) }";
+
+
 
 
             done();
@@ -89,7 +93,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
         newBookingID = bookingID;
 
-        updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\",   }) }";
+        updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\", dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }]  }) }";
 
         console.log(">>>>>>>>>>"+updateInProgressBooking);
         helperUtil.addStep("Request Payload :: "+updateInProgressBooking);
@@ -112,7 +116,27 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-004 : Create Booking api', function (done) {
+
+    it('ZESTY_BOOKINGS-004 Asserting Incomplete: User Booking api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+userBookings_1);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: userBookings_1}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                    done();
+                });
+    });
+
+    it('ZESTY_BOOKINGS-005 : Create Booking api', function (done) {
 
         //helperUtil.addStep("Booking ID :: "+bookingID);
 
@@ -150,7 +174,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-005 : Update Booking api', function (done) {
+    it('ZESTY_BOOKINGS-006 : Update Booking api', function (done) {
 
         helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -174,7 +198,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
 
 
-    it('ZESTY_BOOKINGS-006 REJECTED: Update Booking api', function (done) {
+    it('ZESTY_BOOKINGS-007 REJECTED: Update Booking api', function (done) {
 
                  helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -196,7 +220,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                  });
              });
 
-        it('ZESTY_BOOKINGS-007 CANCELLED : Update Booking api', function (done) {
+        it('ZESTY_BOOKINGS-008 CANCELLED : Update Booking api', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -218,7 +242,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                 });
             });
 
-         it('ZESTY_BOOKINGS-008 ACCEPTED : Update Booking api', function (done) {
+         it('ZESTY_BOOKINGS-009 ACCEPTED : Update Booking api', function (done) {
 
                helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -242,7 +266,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
 
 
-         it('ZESTY_BOOKINGS-009 COMPLETED: Update Booking api', function (done) {
+         it('ZESTY_BOOKINGS-010 COMPLETED: Update Booking api', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -271,7 +295,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
 
 
-    it('ZESTY_BOOKINGS-010 : Mark Booking As Complete Api For Chef', function (done) {
+    it('ZESTY_BOOKINGS-011 : Mark Booking As Complete Api For Chef', function (done) {
 
         helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -294,7 +318,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-011 : Chef Booking api', function (done) {
+    it('ZESTY_BOOKINGS-012 : Chef Booking api', function (done) {
 
             helperUtil.addStep("Request Payload :: "+chefBookings);
 
@@ -314,7 +338,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
             });
         });
 
-    it('ZESTY_BOOKINGS-012 : Mark Booking As Complete Api For User', function (done) {
+    it('ZESTY_BOOKINGS-013 : Mark Booking As Complete Api For User', function (done) {
 
         helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -337,7 +361,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-013 : User Booking api', function (done) {
+    it('ZESTY_BOOKINGS-014 : User Booking api', function (done) {
 
             helperUtil.addStep("Request Payload :: "+userBookings);
 
@@ -357,7 +381,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
 
 
-    it('ZESTY_BOOKINGS-014 Invalid User : Mark Booking As Complete Api For Chef', function (done) {
+    it('ZESTY_BOOKINGS-015 Invalid User : Mark Booking As Complete Api For Chef', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 

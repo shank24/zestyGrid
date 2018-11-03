@@ -23,7 +23,7 @@ describe('Test GraphQL DISHES API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\",  name : \"Palak Paneer\", description : \"Laborum ad occaecat\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC,PALEO, GLUTEN_FREE, SOY_FREE, NUT_FREE, DAIRY_FREE, KETO,VEGAN,MEAT,NOMEAT,KOSHER,HALAL ], isDraft: false, ingredients : [ \"Red Chillies\", \"Pork\", ], equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 200, minPrice : 90.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
+            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\",  name : \"Palak Paneer\", description : \"Laborum ad occaecat\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC,PALEO, GLUTEN_FREE, SOY_FREE, NUT_FREE, DAIRY_FREE, KETO,VEGAN,MEAT,NOMEAT,KOSHER,HALAL ], isDraft: false, ingredients : [ \"Red Chillies\", \"Pork\", ], liked:true, equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 200, minPrice : 90.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
             calculatePrice = "mutation { calculatePrice(dishId: \""+ newDishID + "\", dinerCount: 1000000) }";
 
 
@@ -31,9 +31,9 @@ describe('Test GraphQL DISHES API queries', function () {
             dishesList = "query {dishesList(country: \"US\")}";
             getAvailableDishes = "query { getAvailableDishes(country: \"USA\") }";
 
+            userLikeDish ="mutation { userLikeDish(userId: \"" + global.userID + "\", dishId: \""+ newDishID + "\") }";
 
-
-            dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+            dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
 
 
             dishesByChef = "query {dishesByChef( chefId: \"" + global.userID + "\" ) { dishes{id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
@@ -44,7 +44,7 @@ describe('Test GraphQL DISHES API queries', function () {
 
             updateDish = "mutation { updateDish( dish: { id: \""+ newDishID + "\", chefId : \"" + global.userID + "\",  name : \"Fungee123\", description : \"Something Meaningfull.\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 171.83, approxPrepTime : 60, dishTypes : [ ORGANIC ], ingredients : [ \"Red Chillies\", \"Pork\", ], isDraft: false, equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 19,  media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
 
-            userLikeDish ="mutation { userLikeDish(userId: \"" + global.userID + "\", dishId: \""+ newDishID + "\") }";
+
 
             deleteDish = "mutation { deleteDish(id: \""+ newDishID + "\") }";
 
@@ -161,12 +161,34 @@ describe('Test GraphQL DISHES API queries', function () {
                 });
             });
 
-    it('ZESTY_DISHES-006 : Dish api', function (done) {
+     it('ZESTY_DISHES-006 : User Liked Dish api', function (done) {
+
+                    helperUtil.addStep("New Dish ID is :: "+newDishID);
+
+                    userLikeDish ="mutation { userLikeDish(userId: \"" + global.userID + "\", dishId: \""+ newDishID + "\") }";
+
+                    helperUtil.addStep("Request Payload :: "+userLikeDish);
+
+                    fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                        body: JSON.stringify({query: userLikeDish}),
+                    }).then(function (res) {
+
+                        return res.json();
+
+                    }).then(function (response) {
+                        helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                        done();
+                    });
+                });
+
+    it('ZESTY_DISHES-007 : Dish api', function (done) {
 
         helperUtil.addStep("New Dish ID is :: "+newDishID);
 
 
-        dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+        dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
 
         helperUtil.addStep("Request Payload :: "+dish);
 
@@ -184,7 +206,7 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-007 : Dishes By Chef api', function (done) {
+    it('ZESTY_DISHES-008 : Dishes By Chef api', function (done) {
 
         helperUtil.addStep("Request Payload :: "+dishesByChef);
 
@@ -202,7 +224,7 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-008 : Featured Dishes api', function (done) {
+    it('ZESTY_DISHES-009 : Featured Dishes api', function (done) {
 
         helperUtil.addStep("Request Payload :: "+featuredDishes);
 
@@ -220,7 +242,7 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-009 : Find Dishes api', function (done) {
+    it('ZESTY_DISHES-010 : Find Dishes api', function (done) {
 
         helperUtil.addStep("Request Payload :: "+findDishes);
 
@@ -238,7 +260,7 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-010 : Update Dish api', function (done) {
+    it('ZESTY_DISHES-011 : Update Dish api', function (done) {
 
         helperUtil.addStep("New Dish ID is :: "+newDishID);
 
@@ -261,27 +283,7 @@ describe('Test GraphQL DISHES API queries', function () {
         });
     });
 
-    it('ZESTY_DISHES-011 : User Liked Dish api', function (done) {
 
-        helperUtil.addStep("New Dish ID is :: "+newDishID);
-
-        userLikeDish ="mutation { userLikeDish(userId: \"" + global.userID + "\", dishId: \""+ newDishID + "\") }";
-
-        helperUtil.addStep("Request Payload :: "+userLikeDish);
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: userLikeDish}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-            done();
-        });
-    });
 
      it('ZESTY_DISHES-012 : Re-Test After Updation Dish api', function (done) {
 

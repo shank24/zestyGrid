@@ -45,8 +45,7 @@ describe('Test GraphQL USER API queries', function () {
 
                 user = "query { user(id: \"" + global.userID + "\") { id emailId firstName lastName cellPhone isChef campaign accessToken profilePic dateOfBirth altPhone address{street1} paymentInfo{ type card{ cardId type last4 } } } }";
 
-
-
+                createSupportProfile = "mutation { createSupportProfile(userId: \"" + global.userID + "\") }";
 
 
                 done(err);
@@ -55,6 +54,7 @@ describe('Test GraphQL USER API queries', function () {
             done();
         }
     });
+
 
     it('ZESTY_USER-001 :Update User api', function (done) {
 
@@ -297,5 +297,25 @@ describe('Test GraphQL USER API queries', function () {
                              done();
                          });
                      });
+
+
+
+    it('ZESTY_USER-014 :Create Support Profile API', function (done) {
+
+                    helperUtil.addStep("Request Payload :: "+createSupportProfile);
+
+                    fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                        body: JSON.stringify({query: createSupportProfile}),
+                    }).then(function (res) {
+
+                        return res.json();
+
+                    }).then(function (response) {
+                        helperUtil.addStep("Updated response is :: " + response.errors);
+                        done();
+                    });
+       });
 
 });

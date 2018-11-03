@@ -13,7 +13,7 @@ var util = require('util'),
 
 describe('Test GraphQL POST API queries', function () {
 
-    var createPost,deletePost,featuredPosts,getPostById,posts,updatePost;
+    var createPost,deletePost,featuredPosts,getPostById,posts,updatePost,userLikePost;
 
      var newPostID = "ef03145a-de48-484c-8f1c-db3409aecef4";
 
@@ -21,12 +21,13 @@ describe('Test GraphQL POST API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createPost = "mutation { createPost( post: { chefId : \"" + global.userID + "\", title : \"Fungee1\", body : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  tags: [ \"Algae\" , \"Weed\" ], media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\",size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE } ], isDraft:false }) }";
+            createPost = "mutation { createPost( post: { chefId : \"" + global.userID + "\", title : \"Fungee1\", body : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  tags: [ \"Algae\" , \"Weed\" ], liked:true, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\",size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE } ], isDraft:false }) }";
 
             getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
 
             featuredPosts = "query {featuredPosts(postCount: 10) {id chefId title blurb body isDraft tags numOfLikes media{ type url }}}";
 
+            userLikePost = "mutation { userLikePost(userId: \"" + global.userID + "\", postId: \""+ newPostID + "\") }";
 
             posts = "query {posts(filters: { title: \"Fun\",  chefId:  \"" + global.userID + "\" }, cursor: null, pageSize: 6) { posts {id chefId title blurb body isDraft tags numOfLikes liked media{ type url }} endCursor hasMore next hasNext previous hasPrevious}}";
 
@@ -34,6 +35,8 @@ describe('Test GraphQL POST API queries', function () {
             updatePost = "mutation { updatePost( post: { chefId:  \"" + global.userID + "\", id: \""+ newPostID +"\", title : \"Fungee123\", body : \"Something Meaningfull\",  tags: [ \"Fungee\" , \"Wiener Schnitzel\", \"Bermuda fish chowder\" ], isDraft:false }) }";
 
             deletePost = "mutation { deletePost(id: \""+ newPostID +"\") }";
+
+
 
 
             done();
@@ -109,7 +112,34 @@ describe('Test GraphQL POST API queries', function () {
         });
     });
 
-    it('ZESTY_POST-004 :Posts api', function (done) {
+    it('ZESTY_POST-004 :User Like Post api', function (done) {
+
+                       console.log("Booking ID :: "+postID);
+
+                       newPostID = postID;
+
+                      userLikePost = "mutation { userLikePost(userId: \"" + global.userID + "\", postId: \""+ newPostID + "\") }";
+
+
+                       helperUtil.addStep("Request Payload :: "+userLikePost);
+
+                       fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                           method: 'POST',
+                           headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                           body: JSON.stringify({query: userLikePost}),
+                       }).then(function (res) {
+
+                           return res.json();
+
+                       }).then(function (response) {
+                           helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                           done();
+                       });
+         });
+
+
+
+    it('ZESTY_POST-005 :Posts api', function (done) {
 
         helperUtil.addStep("Request Payload :: "+posts);
 
@@ -127,7 +157,7 @@ describe('Test GraphQL POST API queries', function () {
         });
     });
 
-    it('ZESTY_POST-005 :Update Post api', function (done) {
+    it('ZESTY_POST-006 :Update Post api', function (done) {
 
         console.log("Booking ID :: "+postID);
 
@@ -152,7 +182,7 @@ describe('Test GraphQL POST API queries', function () {
         });
     });
 
-    it('ZESTY_POST-006 :Calling Get Post After Update api', function (done) {
+    it('ZESTY_POST-007 :Calling Get Post After Update api', function (done) {
 
                console.log("Booking ID :: "+postID);
 
@@ -177,7 +207,13 @@ describe('Test GraphQL POST API queries', function () {
                });
            });
 
-    xit('ZESTY_POST-007 :Delete Post api', function (done) {
+
+
+
+
+
+
+    xit('ZESTY_POST-008 :Delete Post api', function (done) {
 
         console.log("Post  ID is :: >>>>>>>>>>> HOLA >>>>>>>>>>"+postID);
 
