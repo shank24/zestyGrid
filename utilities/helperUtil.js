@@ -107,8 +107,6 @@ var helperUtil = {},
     request(url, qresponse);
   };
 
-
-
   helperUtil.envInfo = function () {
     helperUtil.addEnvironment("User Type :: ",process.env.NODE_USERTYPE);
     helperUtil.addEnvironment("Environment :: ",process.env.NODE_ENV);

@@ -256,8 +256,6 @@ describe('Test Q Series Specific Scenarios API', function () {
             updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\",   }) }";
             updateInProgressBooking_1 = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\", dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }]  }) }";
 
-            markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
-            markBookingAsCompleted_1 = "mutation { markBookingAsCompleted(id: \"" + global.userID + 123 + "\", bookingId: \""+ updatedNewBookingID +"\") }";
 
             createBooking = "mutation { createBooking(bookingId: \""+ newBookingID +"\" ) }";
 
@@ -2791,6 +2789,7 @@ describe('Test Q Series Specific Scenarios API', function () {
             });
         });
 
+//chefWeeklySchedule
 
     it('99_19-ZESTY_SCHEDULE-004 :Chef Weekly Schedule api', function (done) {
 
@@ -2810,6 +2809,7 @@ describe('Test Q Series Specific Scenarios API', function () {
             });
         });
 
+//reserveChefSlot
 
     it('99_20-ZESTY_BOOKINGS-001 Invalid User : Reserve Chef Slot api', function (done) {
 
@@ -2866,5 +2866,27 @@ describe('Test Q Series Specific Scenarios API', function () {
                 done();
             });
         });
+
+
+
+
+     it('99_23-ZESTY_CHEF-003 :Get Chef api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+getChef);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: getChef}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                    done();
+                });
+     });
+
 
 });

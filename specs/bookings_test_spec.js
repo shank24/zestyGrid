@@ -20,6 +20,8 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
+            reserveChefSlot = "mutation { reserveChefSlot(chefId: \"" + global.userID + "\", userId: \"" + global.userID + "\", day: \"2018-08-13\", slot: {start: \"11:30\", end: \"14:00\"}) }";
+
             createInProgressBooking = "mutation { createInProgressBooking(booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", date: \"2018-08-13\", timeSlot: { start: \"11:00\", end: \"13:00\"}, dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }] ,  equipmentsPresent: [\"Microwave Oven\", \"Grill\", \"Gas\"], cardId: \"" + global.cardID + "\",   }) }";
             updateInProgressBooking = "mutation { updateInProgressBooking(bookingId: \""+ newBookingID +"\", booking: { userId: \"" + global.userID + "\", chefId: \"" + global.userID + "\", cardId: \"" + global.cardID + "\", dishes: [{ dishId: \"" + global.dishID + "\", serves: 4 }]  }) }";
 
@@ -27,18 +29,18 @@ describe('Test GraphQL BOOKINGS API queries', function () {
             updateBooking = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: COMPLETED ) }";
 
             markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
-            reserveChefSlot = "mutation { reserveChefSlot(chefId: \"" + global.userID + "\", userId: \"" + global.userID + "\", day: \"2018-08-13\", slot: {start: \"11:30\", end: \"14:00\"}) }";
 
-            userBookings = "query { userBookings(userId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6) {bookings{ id chefId  date   chefReviewId } endCursor hasMore} }";
-            chefBookings =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
 
+
+            chefBookings =  "query { chefBookings(chefId: \"" + global.userID + "\", status: COMPLETED_BY_CHEF, cursor: null, pageSize: 6,startDate: \"2018-08-13\", numWeeks:15, next:null,previous:null) {bookings{ id userId distance amount date  userReviewId } endCursor hasMore} }";
+
+            userBookings = "query { userBookings(userId: \"" + global.userID + "\", status: CANCELED, cursor: null, pageSize: 6) {bookings{ id chefId  date   chefReviewId } endCursor hasMore} }";
             userBookings_1 = "query { userBookings(userId: \"" + global.userID + "\", status: INCOMPLETE, cursor: null, pageSize: 6) {bookings{ id chefId date timeSlot{start end} dishes{ dishId serves cuisines dishName price} chefReviewId } endCursor hasMore} }";
 
             updateBooking_1 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: REJECTED, rejectReason: \"Not On Time\" ) }";
             updateBooking_2 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: CANCELLED, rejectReason: \"Not On Time AGAIN\" ) }";
             updateBooking_3 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: ACCEPTED) }";
             updateBooking_4 = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: COMPLETED) }";
-
 
 
 
@@ -117,7 +119,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
     });
 
 
-    it('ZESTY_BOOKINGS-004 Asserting Incomplete: User Booking api', function (done) {
+    xit('ZESTY_BOOKINGS-004 Asserting Incomplete: User Booking api', function (done) {
 
                 helperUtil.addStep("Request Payload :: "+userBookings_1);
 
@@ -178,7 +180,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
         helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
-        updateBooking = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: COMPLETED ) }";
+        updateBooking = "mutation { updateBooking(bookingId: \""+ updatedNewBookingID +"\", status: CANCELED ) }";
 
         helperUtil.addStep("Request Payload :: "+updateBooking);
 
@@ -196,9 +198,29 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
+    it('ZESTY_BOOKINGS-007 : User Booking api', function (done) {
+
+                helperUtil.addStep("Request Payload :: "+userBookings);
+
+                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                    body: JSON.stringify({query: userBookings}),
+                }).then(function (res) {
+
+                    return res.json();
+
+                }).then(function (response) {
+                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                    done();
+                });
+    });
 
 
-    it('ZESTY_BOOKINGS-007 REJECTED: Update Booking api', function (done) {
+
+
+    /*xit('ZESTY_BOOKINGS-007 REJECTED: Update Booking api', function (done) {
 
                  helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -220,7 +242,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                  });
              });
 
-        it('ZESTY_BOOKINGS-008 CANCELLED : Update Booking api', function (done) {
+   xit('ZESTY_BOOKINGS-008 CANCELLED : Update Booking api', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -242,7 +264,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                 });
             });
 
-         it('ZESTY_BOOKINGS-009 ACCEPTED : Update Booking api', function (done) {
+   xit('ZESTY_BOOKINGS-009 ACCEPTED : Update Booking api', function (done) {
 
                helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -266,7 +288,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
 
 
-         it('ZESTY_BOOKINGS-010 COMPLETED: Update Booking api', function (done) {
+   xit('ZESTY_BOOKINGS-010 COMPLETED: Update Booking api', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -288,80 +310,31 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                 });
             });
 
+*/
 
 
+   it('ZESTY_BOOKINGS-011 : Chef Booking api', function (done) {
+
+               helperUtil.addStep("Request Payload :: "+chefBookings);
+
+               fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                   method: 'POST',
+                   headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                   body: JSON.stringify({query: chefBookings}),
+               }).then(function (res) {
+
+                   return res.json();
+
+               }).then(function (response) {
+
+                   helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                   done();
+               });
+   });
 
 
-
-
-
-    it('ZESTY_BOOKINGS-011 : Mark Booking As Complete Api For Chef', function (done) {
-
-        helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
-
-
-        markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
-
-        helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: markBookingAsCompleted}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-            done();
-        });
-    });
-
-    it('ZESTY_BOOKINGS-012 : Chef Booking api', function (done) {
-
-            helperUtil.addStep("Request Payload :: "+chefBookings);
-
-            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-                body: JSON.stringify({query: chefBookings}),
-            }).then(function (res) {
-
-                return res.json();
-
-            }).then(function (response) {
-
-                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-
-                done();
-            });
-        });
-
-    it('ZESTY_BOOKINGS-013 : Mark Booking As Complete Api For User', function (done) {
-
-        helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
-
-
-        markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
-
-        helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: markBookingAsCompleted}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-            done();
-        });
-    });
-
-    it('ZESTY_BOOKINGS-014 : User Booking api', function (done) {
+   it('ZESTY_BOOKINGS-012 : User Booking api', function (done) {
 
             helperUtil.addStep("Request Payload :: "+userBookings);
 
@@ -381,7 +354,58 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
 
 
-    it('ZESTY_BOOKINGS-015 Invalid User : Mark Booking As Complete Api For Chef', function (done) {
+    it('ZESTY_BOOKINGS-013 : Mark Booking As Complete Api ', function (done) {
+
+        helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
+
+
+        markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
+
+        helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
+
+        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+            body: JSON.stringify({query: markBookingAsCompleted}),
+        }).then(function (res) {
+
+            return res.json();
+
+        }).then(function (response) {
+            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            done();
+        });
+    });
+
+
+
+    /*it('ZESTY_BOOKINGS-014 : Mark Booking As Complete Api For User', function (done) {
+
+        helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
+
+
+        markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
+
+        helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
+
+        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+            body: JSON.stringify({query: markBookingAsCompleted}),
+        }).then(function (res) {
+
+            return res.json();
+
+        }).then(function (response) {
+            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+            done();
+        });
+    });
+
+
+
+
+    xit('ZESTY_BOOKINGS-016 Invalid User : Mark Booking As Complete Api For Chef', function (done) {
 
                 helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -403,7 +427,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
                     done();
                 });
             });
-
+*/
 
 
 });

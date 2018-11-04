@@ -313,7 +313,7 @@ describe('Test GraphQL USER API queries', function () {
                         return res.json();
 
                     }).then(function (response) {
-                        helperUtil.addStep("Updated response is :: " + response.errors);
+                        helperUtil.addStep("Updated response is :: " + response.data);
                         done();
                     });
        });
