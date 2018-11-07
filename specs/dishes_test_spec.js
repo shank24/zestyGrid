@@ -23,7 +23,7 @@ describe('Test GraphQL DISHES API queries', function () {
         if (!userInfo) {
             helperUtil.envInfo();
 
-            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\",  name : \"Palak Paneer\", description : \"Laborum ad occaecat\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC,PALEO, GLUTEN_FREE, SOY_FREE, NUT_FREE, DAIRY_FREE, KETO,VEGAN,MEAT,NOMEAT,KOSHER,HALAL ], isDraft: false, ingredients : [ \"Red Chillies\", \"Pork\", ], liked:true, equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ], minDinerSize : 200, minPrice : 90.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
+            createDish = "mutation { createDish( dish: { chefId : \"" + global.userID + "\",  name : \"Palak Paneer\", description : \"Laborum ad occaecat\",  cuisines :[\"Chinese\",\"Italian\"],  approxIngredientsCost : 71.9982, approxPrepTime : 24, dishTypes : [ ORGANIC,PALEO, GLUTEN_FREE, SOY_FREE, NUT_FREE, DAIRY_FREE, KETO,VEGAN,MEAT,NOMEAT,KOSHER,HALAL ], isDraft: false, ingredients : [ \"Red Chillies\", \"Pork\", ], liked:true, equipmentNeeded : [ \"Bread machine\", \"Communal oven\", \"Solar cooker\" ],  minDinerSize : 200, minPrice : 90.9526, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\" ,size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE} ] }) }";
             calculatePrice = "mutation { calculatePrice(dishId: \""+ newDishID + "\", dinerCount: 1000000) }";
 
 
@@ -33,7 +33,7 @@ describe('Test GraphQL DISHES API queries', function () {
 
             userLikeDish ="mutation { userLikeDish(userId: \"" + global.userID + "\", dishId: \""+ newDishID + "\") }";
 
-            dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+            dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes saved } }";
 
 
             dishesByChef = "query {dishesByChef( chefId: \"" + global.userID + "\" ) { dishes{id chefId name description media {url type}  dishTypes  ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes} endCursor hasMore next hasNext previous hasPrevious}}";
@@ -188,7 +188,7 @@ describe('Test GraphQL DISHES API queries', function () {
         helperUtil.addStep("New Dish ID is :: "+newDishID);
 
 
-        dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes } }";
+        dish = "query { dish(id: \""+ newDishID + "\") { id chefId name description media {url type}  dishTypes liked isDraft ingredients minPrice minDinerSize equipmentNeeded approxIngredientsCost numOfLikes saved } }";
 
         helperUtil.addStep("Request Payload :: "+dish);
 

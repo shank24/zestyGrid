@@ -16,6 +16,9 @@ var helperUtil = {},
   helperUtil.generateAuthToken = function (done) {
 
     var email = helperUtil.dummyEmailAddress();
+    var date = helperUtil.getDateAndTime();
+
+
 
     function generateUserQuery ( type, userId) {
       if( type === 'query') {
@@ -68,6 +71,7 @@ var helperUtil = {},
               helperUtil.addStep("Email ID :: "+data.user.emailId);
               helperUtil.addStep("First Name :: "+data.user.firstName);
               helperUtil.addStep("Last Name :: "+data.user.lastName);
+              helperUtil.addStep("Current Time Is ::"+date )
               done(null, {
                 userID: userID,
                 authToken: authToken

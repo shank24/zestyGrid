@@ -119,24 +119,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
     });
 
 
-    xit('ZESTY_BOOKINGS-004 Asserting Incomplete: User Booking api', function (done) {
 
-                helperUtil.addStep("Request Payload :: "+userBookings_1);
-
-                fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-                    body: JSON.stringify({query: userBookings_1}),
-                }).then(function (res) {
-
-                    return res.json();
-
-                }).then(function (response) {
-                    helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-
-                    done();
-                });
-    });
 
     it('ZESTY_BOOKINGS-005 : Create Booking api', function (done) {
 
@@ -176,7 +159,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-006 : Update Booking api', function (done) {
+    xit('ZESTY_BOOKINGS-006 : Update Booking api', function (done) {
 
         helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -198,7 +181,50 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
     });
 
-    it('ZESTY_BOOKINGS-007 : User Booking api', function (done) {
+    xit('ZESTY_BOOKINGS-007 : Mark Booking As Complete Api ', function (done) {
+
+            helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
+
+
+            markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
+
+            helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
+
+            fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                body: JSON.stringify({query: markBookingAsCompleted}),
+            }).then(function (res) {
+
+                return res.json();
+
+            }).then(function (response) {
+                helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+                done();
+            });
+        });
+
+    xit('ZESTY_BOOKINGS-008 : Chef Booking api', function (done) {
+
+                   helperUtil.addStep("Request Payload :: "+chefBookings);
+
+                   fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                       method: 'POST',
+                       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                       body: JSON.stringify({query: chefBookings}),
+                   }).then(function (res) {
+
+                       return res.json();
+
+                   }).then(function (response) {
+
+                       helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                       done();
+                   });
+       });
+
+    xit('ZESTY_BOOKINGS-007 : User Booking api', function (done) {
 
                 helperUtil.addStep("Request Payload :: "+userBookings);
 
@@ -220,7 +246,28 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 
 
 
-    /*xit('ZESTY_BOOKINGS-007 REJECTED: Update Booking api', function (done) {
+    /*
+         xit('ZESTY_BOOKINGS-004 Asserting Incomplete: User Booking api', function (done) {
+
+                        helperUtil.addStep("Request Payload :: "+userBookings_1);
+
+                        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
+                            body: JSON.stringify({query: userBookings_1}),
+                        }).then(function (res) {
+
+                            return res.json();
+
+                        }).then(function (response) {
+                            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
+
+                            done();
+                        });
+            });
+
+
+        xit('ZESTY_BOOKINGS-007 REJECTED: Update Booking api', function (done) {
 
                  helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
 
@@ -313,28 +360,10 @@ describe('Test GraphQL BOOKINGS API queries', function () {
 */
 
 
-   it('ZESTY_BOOKINGS-011 : Chef Booking api', function (done) {
-
-               helperUtil.addStep("Request Payload :: "+chefBookings);
-
-               fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-                   method: 'POST',
-                   headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-                   body: JSON.stringify({query: chefBookings}),
-               }).then(function (res) {
-
-                   return res.json();
-
-               }).then(function (response) {
-
-                   helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-
-                   done();
-               });
-   });
 
 
-   it('ZESTY_BOOKINGS-012 : User Booking api', function (done) {
+
+   xit('ZESTY_BOOKINGS-012 : User Booking api', function (done) {
 
             helperUtil.addStep("Request Payload :: "+userBookings);
 
@@ -354,28 +383,7 @@ describe('Test GraphQL BOOKINGS API queries', function () {
         });
 
 
-    it('ZESTY_BOOKINGS-013 : Mark Booking As Complete Api ', function (done) {
 
-        helperUtil.addStep("Create booking Updated :: <<<<<<<<<<<<<<<<<<<<<HOLA >>>"+updatedNewBookingID);
-
-
-        markBookingAsCompleted = "mutation { markBookingAsCompleted(id: \"" + global.userID + "\", bookingId: \""+ updatedNewBookingID +"\") }";
-
-        helperUtil.addStep("Request Payload :: "+markBookingAsCompleted);
-
-        fetch(JSONData.AutoTextList[0].BASE_URL + JSONData.AutoTextList[0].REDIRECT_URL, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + global.authToken},
-            body: JSON.stringify({query: markBookingAsCompleted}),
-        }).then(function (res) {
-
-            return res.json();
-
-        }).then(function (response) {
-            helperUtil.addStep("Updated response is :: " + JSON.stringify(response.data));
-            done();
-        });
-    });
 
 
 
