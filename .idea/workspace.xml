@@ -5,8 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/specs/bookings_test_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/specs/bookings_test_spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/specs/dishes_test_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/specs/dishes_test_spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/specs/post_test_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/specs/post_test_spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/specs/user_test_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/specs/user_test_spec.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/helperUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/helperUtil.js" afterDir="false" />
     </list>
     <ignored path="spisa-test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,13 +27,16 @@
     <session id="110137344">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="64" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="74" />
+          <entry key="project.open.time.0" value="4" />
+          <entry key="project.open.time.1" value="3" />
+          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.25" value="6" />
+          <entry key="project.open.time.25" value="7" />
           <entry key="project.open.time.26" value="8" />
-          <entry key="project.open.time.27" value="13" />
+          <entry key="project.open.time.27" value="14" />
           <entry key="project.open.time.28" value="6" />
           <entry key="project.open.time.29" value="6" />
           <entry key="project.open.time.30" value="4" />
@@ -50,29 +54,29 @@
           <entry key="project.open.time.51" value="1" />
           <entry key="project.open.time.53" value="1" />
           <entry key="project.open.time.71" value="1" />
-          <entry key="project.opened" value="68" />
+          <entry key="project.opened" value="79" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="43" />
+          <entry key="js" value="49" />
           <entry key="json" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JSON" value="2" />
-          <entry key="JavaScript" value="43" />
+          <entry key="JavaScript" value="49" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="9942" />
+          <entry key="js" value="10033" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="9942" />
+          <entry key="JavaScript" value="10033" />
         </counts>
       </usages-collector>
     </session>
@@ -82,20 +86,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/dishes_test_spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4305">
-              <caret line="287" column="25" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18705">
-              <caret line="1247" column="62" selection-start-line="1247" selection-start-column="55" selection-end-line="1247" selection-end-column="62" />
+            <state relative-caret-position="-1548">
+              <caret line="2750" lean-forward="true" selection-start-line="2750" selection-end-line="2750" />
             </state>
           </provider>
         </entry>
@@ -103,17 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/post_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3225">
-              <caret line="215" column="23" selection-start-line="215" selection-start-column="23" selection-end-line="215" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/review_test_spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2865">
-              <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
+            <state relative-caret-position="-2688">
+              <caret line="17" column="60" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -121,17 +107,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/bookings_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="687">
-              <caret line="342" column="75" selection-start-line="342" selection-start-column="63" selection-end-line="342" selection-end-column="75" />
+            <state relative-caret-position="150">
+              <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/user_test_spec.js">
+        <entry file="file://$PROJECT_DIR$/specs/review_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4725">
-              <caret line="315" column="84" selection-start-line="315" selection-start-column="84" selection-end-line="315" selection-end-column="84" />
+            <state relative-caret-position="-363">
+              <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -145,27 +131,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utilities/helperUtil.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-                <element signature="e#0#8384#0" />
-              </folding>
+            <state relative-caret-position="405">
+              <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -173,8 +143,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/chef_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1545">
-              <caret line="103" column="11" selection-start-line="87" selection-start-column="3" selection-end-line="103" selection-end-column="11" />
+            <state relative-caret-position="60">
+              <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -182,8 +152,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/CTC_test_spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
+            <state relative-caret-position="-6138">
               <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/dishes_test_spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1818">
+              <caret line="190" column="214" selection-start-line="190" selection-start-column="214" selection-end-line="190" selection-end-column="214" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/login_test_spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="716">
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
@@ -199,15 +187,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>updateUserPayment</find>
-      <find>deleteUserPayment</find>
-      <find>addChefPayout = &quot;mutation { addChefPayoutMethod(chefId: \&quot;&quot; + global.userID + &quot;\&quot;, payout: { type: ACH, achAccount: { bankName: \&quot;Stripe Test Bank\&quot;, type: CHECKING, routingNumber: \&quot;110000000\&quot;, accountNumber: \&quot;000123456789\&quot; } }) } &quot;;</find>
-      <find>addChefPayout</find>
-      <find>updateChefPayoutMethod</find>
-      <find>global.cardID</find>
       <find>deleteChefPayoutMethod</find>
       <find>newCardId</find>
-      <find>dish</find>
       <find>updateDish</find>
       <find>submitReview</find>
       <find>updateReview</find>
@@ -226,9 +207,16 @@
       <find>userBookings</find>
       <find>rejectReason</find>
       <find>markBookingAsCompleted</find>
-      <find>chefBookings</find>
       <find>getChef</find>
       <find>dummyEmailAddress</find>
+      <find>chefBookings</find>
+      <find>dish</find>
+      <find>userBookings_1</find>
+      <find>bookingIDFinal</find>
+      <find>ID</find>
+      <find>cardId</find>
+      <find>updateUserPayment</find>
+      <find>cardID</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -268,16 +256,16 @@
         <option value="$PROJECT_DIR$/testData/testData_DEV.json" />
         <option value="$PROJECT_DIR$/specs/CTC_Q7_test_spec.js" />
         <option value="$PROJECT_DIR$/specs/CTC_test_spec.js" />
-        <option value="$PROJECT_DIR$/conf.js" />
         <option value="$PROJECT_DIR$/specs/chef_test_spec.js" />
         <option value="$PROJECT_DIR$/specs/review_test_spec.js" />
         <option value="$PROJECT_DIR$/specs/schedule_test_spec.js" />
-        <option value="$PROJECT_DIR$/specs/post_test_spec.js" />
         <option value="$PROJECT_DIR$/specs/dishes_test_spec.js" />
-        <option value="$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js" />
-        <option value="$PROJECT_DIR$/specs/user_test_spec.js" />
+        <option value="$PROJECT_DIR$/specs/post_test_spec.js" />
         <option value="$PROJECT_DIR$/specs/bookings_test_spec.js" />
         <option value="$PROJECT_DIR$/utilities/helperUtil.js" />
+        <option value="$PROJECT_DIR$/specs/user_test_spec.js" />
+        <option value="$PROJECT_DIR$/conf.js" />
+        <option value="$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js" />
       </list>
     </option>
   </component>
@@ -302,7 +290,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -313,13 +301,23 @@
             <path>
               <item name="graphqlTesting" type="b2602c69:ProjectViewProjectNode" />
               <item name="graphqlTesting" type="462c0819:PsiDirectoryNode" />
+              <item name="allure-report" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="graphqlTesting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graphqlTesting" type="462c0819:PsiDirectoryNode" />
+              <item name="specs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="graphqlTesting" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graphqlTesting" type="462c0819:PsiDirectoryNode" />
               <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -331,23 +329,23 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/graphql-tester/lib/main/index.js&#10;/home/sahil/WebstormProjects/spisa-test/node_modules/isomorphic-fetch/fetch-npm-node.js" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541016087844" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542013870008" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/GraphQL/GIT_Codes/graphqlTesting_load_testing" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/specs" />
       <recent name="$PROJECT_DIR$/test_graphQL" />
       <recent name="$PROJECT_DIR$/pageObjects" />
       <recent name="$PROJECT_DIR$/testData" />
       <recent name="$PROJECT_DIR$/utilities" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -489,7 +487,7 @@
       <window_info id="Capture Tool" order="0" />
       <window_info id="Designer" order="1" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.37039518" />
+      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.14266577" />
       <window_info id="Structure" order="4" weight="0.25" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
@@ -503,7 +501,7 @@
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5031299" side_tool="true" weight="0.6697531" />
       <window_info anchor="bottom" id="TODO" order="9" weight="0.32662538" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4968701" weight="0.64561856" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4968701" weight="0.66752577" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Maven Projects" order="0" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
@@ -649,50 +647,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/conf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/login_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/dishes_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4305">
-          <caret line="287" column="25" selection-start-line="287" selection-start-column="25" selection-end-line="287" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18705">
-          <caret line="1247" column="62" selection-start-line="1247" selection-start-column="55" selection-end-line="1247" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/post_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3225">
-          <caret line="215" column="23" selection-start-line="215" selection-start-column="23" selection-end-line="215" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/review_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2865">
-          <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/user_test_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4725">
-          <caret line="315" column="84" selection-start-line="315" selection-start-column="84" selection-end-line="315" selection-end-column="84" />
+        <state relative-caret-position="2040">
+          <caret line="136" column="10" selection-start-line="136" selection-start-column="10" selection-end-line="136" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -703,47 +666,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/chef_test_spec.js">
+    <entry file="file://$PROJECT_DIR$/utilities/helperUtil.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
-          <caret line="103" column="11" selection-start-line="87" selection-start-column="3" selection-end-line="103" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/CTC_test_spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
+        <state relative-caret-position="405">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/bookings_test_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="687">
-          <caret line="342" column="75" selection-start-line="342" selection-start-column="63" selection-end-line="342" selection-end-column="75" />
+        <state relative-caret-position="150">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utilities/helperUtil.js">
+    <entry file="file://$PROJECT_DIR$/specs/chef_test_spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-            <element signature="e#0#8384#0" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/CTC_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6138">
+          <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/dishes_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1818">
+          <caret line="190" column="214" selection-start-line="190" selection-start-column="214" selection-end-line="190" selection-end-column="214" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/login_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/post_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2688">
+          <caret line="17" column="60" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/review_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-363">
+          <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/Specific_Scenarios_test_spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1548">
+          <caret line="2750" lean-forward="true" selection-start-line="2750" selection-end-line="2750" />
         </state>
       </provider>
     </entry>

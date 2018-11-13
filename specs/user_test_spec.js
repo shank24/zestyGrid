@@ -12,7 +12,8 @@ var util = require('util'),
 describe('Test GraphQL USER API queries', function () {
 
     var updateUserQuery,addUserPayment,userPaymentMethods,updateUserPayment,savedPosts,savedDishes,savedChefs,refundUser,forgotPassword,deleteUserPayment,deleteUser,deleteSavedItems,addUserToStripe,addSavedItems;
-    var newCardId = 'card_1CaC5IJt7gce93gZgTTYcP2Y';
+    var newCardId = "card_1CaC5IJt7gce93gZgTTYcP2Y";
+    //var cardID="card_1CaC5IJt7gce93gZgTTYcP2Y";
 
     beforeEach(function (done) {
         if (!userInfo) {
@@ -133,7 +134,7 @@ describe('Test GraphQL USER API queries', function () {
 
 
 
-        console.log("Card ID is :: >>>>>>>>>>> HOLA >>>>>>>>>>"+cardID);
+        //console.log("Card ID is :: >>>>>>>>>>> HOLA >>>>>>>>>>"+cardID);
         newCardId = global.cardID;
         helperUtil.addStep("New Card ID is :: "+newCardId);
         updateUserPayment = "mutation {updateUserPayment( userId: \"" + global.userID + "\", payment: { type: CARD, card: { number: \"378282246310005\", expMonth: 5, expYear: 2025, cvc: 987 } }, cardId: \""+ newCardId + "\" )}";

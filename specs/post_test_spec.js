@@ -23,7 +23,7 @@ describe('Test GraphQL POST API queries', function () {
 
             createPost = "mutation { createPost( post: { chefId : \"" + global.userID + "\", title : \"Fungee1\", body : \"Laborum ad occaecat dolore fugiat id. Lorem officia irure mollit adipisicing laborum voluptate exercitation voluptate fugiat in proident. Culpa anim laboris nulla id reprehenderit esse cillum voluptate consequat quis. Laborum incididunt voluptate reprehenderit sunt sit sunt aliqua in minim elit.\",  tags: [ \"Algae\" , \"Weed\" ], liked:true, media : [ { type : VIDEO, url : \"https://unsplash.com/photos/Gg5-K-mJwuQ\",size:SMALL_ROUND_THUMBNAIL ,appType:MOBILE } ], isDraft:false }) }";
 
-            getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
+            getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft saved tags numOfLikes media{ type url } } }";
 
             featuredPosts = "query {featuredPosts(postCount: 10) {id chefId title blurb body isDraft tags numOfLikes media{ type url }}}";
 
@@ -76,7 +76,7 @@ describe('Test GraphQL POST API queries', function () {
            newPostID = postID;
 
 
-           getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft tags numOfLikes media{ type url } } }";
+           getPostById = "query {post(id: \""+ newPostID +"\") {id chefId title blurb body isDraft saved tags numOfLikes media{ type url } } }";
 
            helperUtil.addStep("Request Payload :: "+getPostById);
 
